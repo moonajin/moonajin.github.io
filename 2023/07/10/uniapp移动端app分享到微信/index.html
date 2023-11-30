@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="瑾瑾">
+    
+    <title>
+        
+            uniapp移动端app分享到微信 |
+        
+        瑾瑾的技术分享博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"moonajin.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+                瑾瑾的技术分享博客
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">uniapp移动端app分享到微信</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">瑾瑾</span>
+                        
+                            <span class="author-label">前端开发工程师</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+  <span class="article-date article-meta-item">
+    <i class="fas fa-edit"></i>&nbsp;2023-07-10
+  </span>
+  
+  <span class="article-categories article-meta-item">
+    <i class="fas fa-folder"></i>&nbsp;
+    <ul>
+      
+      <li>
+        <a href="/categories/uniapp/"
+          >uniapp</a
+        >&nbsp;
+      </li>
+      
+    </ul>
+  </span>
+       
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="一、相关配置">一、相关配置</h2>
+<h3 id="1-配置应用支持通用链接-Universal-Link">1.配置应用支持通用链接(Universal Link)</h3>
+<blockquote>
+<p>由于苹果 iOS 13 系统版本安全升级，微信 SDK1.8.6 版本要求支持 Universal Links 方式跳转，以便进行合法性校验，提升安全性。如果不配置通用链接，使用新版本 HBuilderX 提交云端打包会失败。</p>
+</blockquote>
+<ul>
+<li>具体配置可参考：<a class="link"   target="_blank" rel="noopener" href="https://www.jinjin.link/2023/07/07/iOS%20%E9%85%8D%E7%BD%AE%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5(Universal%20Link)/" >iOS 配置通用链接(Universal Link)<i class="fas fa-external-link-alt"></i></a></li>
+<li>以上配置完成可确定通用链接地址，例如：<code>https://help.wechat.com/app/</code>，（要求必须使用 https 协议，以&quot;/&quot;结尾，此链接仅为示例，实际应用请根据自己的配置填写）</li>
+</ul>
+<blockquote>
+<p>通用链接内容保存在 <code>manifest.json</code> 中，云打包后生效，被手机读取的时机是应用被安装的时候。如果你的通用链接内容有变化，则需要重新提交云打包，并重新安装一次应用才能生效。</p>
+</blockquote>
+<h3 id="2-在“微信开放平台”配置通用链接-Universal-Link">2.在“微信开放平台”配置通用链接(Universal Link)</h3>
+<ul>
+<li>
+<p>2.1 打开<a class="link"   target="_blank" rel="noopener" href="https://open.weixin.qq.com/" >微信开放平台<i class="fas fa-external-link-alt"></i></a>并登录；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/open_weixin_ul1.jpg" alt="微信开放平台官网"></p>
+</li>
+<li>
+<p>2.2 在“管理中心”页面的“移动应用”下找到已经申请的应用（没有申请应用请点击“创建移动应用”新建应用），点击“查看”打开“应用详情”页面；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/open_weixin_ul2.jpg" alt="管理中心 - 移动应用"></p>
+</li>
+<li>
+<p>2.3 找到“基本信息”这个选项，点击“修改”；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/open_weixin_ul3.jpg" alt="应用详情"></p>
+</li>
+<li>
+<p>2.4 在 iOS 应用下的 Universal Links 项中配置应用的通用链接；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/open_weixin_ul4.jpg" alt="配置 Universal Links"></p>
+</li>
+</ul>
+<blockquote>
+<p>注意：在微信开放平台添加/修改移动应用并提交审核，审核通过后可获取应用 ID（AppID），可用于开发。只有审核通过的应用才能正式发布使用。</p>
+</blockquote>
+<h3 id="3-粘贴通用链接到对应权限模块">3.粘贴通用链接到对应权限模块</h3>
+<h4 id="3-1-配置-manifest-json">3.1 配置 <code>manifest.json</code></h4>
+<ul>
+<li>
+<p>打开 HBuilderX 并选择对应的项目，找到 <code>manifest.json</code>，在“App 模块配置”中，勾选“Share（分享）”选项，选择“微信分享”，在这里可以进行配置：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/hx-share-config.jpg" alt="manifest.json 配置"></p>
+</li>
+<li>
+<p>appid</p>
+<ul>
+<li>微信开放平台申请的<strong>移动应用的 AppID</strong>值</li>
+</ul>
+</li>
+<li>
+<p>iOS 平台通用链接（Universal Links）</p>
+<ul>
+<li>将通过上面步骤生成的通用链接（Universal Links）填写到此处，必须与“微信开放平台”配置的完全一致</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>如果使用了“微信登录”和“微信支付”也需要配置 iOS 平台通用链接（Universal Links），并且配置的值必须相同。</p>
+</blockquote>
+<h2 id="二、使用-api-代码">二、使用 api &amp;代码</h2>
+<h3 id="调用-uni-share-OBJECT-发起分享操作">调用 <a class="link"   target="_blank" rel="noopener" href="https://uniapp.dcloud.net.cn/api/plugins/share.html" >uni.share(OBJECT)<i class="fas fa-external-link-alt"></i></a> 发起分享操作</h3>
+<ul>
+<li>
+<p>App 分享为微信小程序</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">uni.share(&#123;</span><br><span class="line">  <span class="attr">provider</span>: <span class="string">&quot;weixin&quot;</span>, <span class="comment">// 分享服务提供商</span></span><br><span class="line">  <span class="attr">scene</span>: <span class="string">&quot;WXSceneSession&quot;</span>, <span class="comment">// 分享的场景，provider 为 weixin 时必填，WXSceneSession-分享到聊天界面</span></span><br><span class="line">  <span class="attr">type</span>: <span class="number">5</span>, <span class="comment">// 分享形式，0图文、1纯文字、2纯图片、3音乐、4视频、5小程序等，默认值为0图文</span></span><br><span class="line">  <span class="attr">imageUrl</span>:</span><br><span class="line">    <span class="string">&quot;https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/share-logo@3.png&quot;</span>, <span class="comment">// 分享的图片地址，type 为 0、2、5 时必填</span></span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;欢迎体验uniapp&quot;</span>, <span class="comment">// 分享内容的标题</span></span><br><span class="line">  <span class="attr">miniProgram</span>: &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&quot;gh_abcdefg&quot;</span>, <span class="comment">// 微信小程序原始id，注意：此处必须是原始id</span></span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;pages/index/index&quot;</span>, <span class="comment">// 点击链接进入的页面</span></span><br><span class="line">    <span class="attr">type</span>: <span class="number">0</span>, <span class="comment">// 微信小程序版本类型，可取值： 0-正式版； 1-测试版； 2-体验版。 默认值为0</span></span><br><span class="line">    <span class="attr">webUrl</span>: <span class="string">&quot;http://uniapp.dcloud.io&quot;</span> <span class="comment">// 兼容低版本的网页链接</span></span><br><span class="line">  &#125;, <span class="comment">// 分享小程序必要参数，type 为 5 时必填</span></span><br><span class="line">  <span class="attr">success</span>: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;success:&quot;</span> + <span class="built_in">JSON</span>.stringify(res));</span><br><span class="line">    uni.showToast(&#123;</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&quot;分享成功&quot;</span>,</span><br><span class="line">      <span class="attr">icon</span>: <span class="string">&quot;success&quot;</span>,</span><br><span class="line">      <span class="attr">duration</span>: <span class="number">2000</span>,</span><br><span class="line">      <span class="attr">mask</span>: <span class="literal">true</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">fail</span>: <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;fail:&quot;</span> + <span class="built_in">JSON</span>.stringify(err));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="三、常见问题及解答">三、常见问题及解答</h2>
+<ul>
+<li>
+<p>问题 1：拉起微信后提示“由于应用 universal link 校验不通过，无法完成微信分享”</p>
+<ul>
+<li>原因：很可能是 App 中注册的 AppID 同微信开放平台的不一样</li>
+<li>解决：统一 AppID 后解决</li>
+</ul>
+</li>
+<li>
+<p>问题 2：APP 唤起微信分享小程序报错，显示“由于不支持的分享类型”，按钮显示为“返回（未审核应用）”</p>
+<ul>
+<li>解决：如果已经在微信开放平台上申请关联并通过审核，那么检查绑定的 appid，appid 需要填写<strong>微信开放平台移动应用的 AppID</strong></li>
+</ul>
+</li>
+<li>
+<p>问题 3：使用微信登录、分享、支付等功能时，用户非首次调起微信，仍然出现二次跳转 app（具体表现为：拉起微信后进行授权，然后立刻返回 App，然后再次调起微信）</p>
+<ul>
+<li>
+<p>原因：由于通用链接授权失败，第二次降级为 URLScheme 方式启动微信</p>
+</li>
+<li>
+<p>解决：在微信公众平台注册的通用链接要带路径，不能带 query 参数，且 AASA 配置末尾必须添加通配符<code>*</code>号，App 的 registerApp 的通用链接参数也一定要带路径，保持一致，单纯的域名就会导致二次降级启动。例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;applinks&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;apps&quot;</span>: [],</span><br><span class="line">    <span class="attr">&quot;details&quot;</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">&quot;appID&quot;</span>: <span class="string">&quot;8ARUHGUQNH.com.AppSample&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;paths&quot;</span>: [<span class="string">&quot;/AppSample/*&quot;</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>问题 4：使用 <code>uni.share</code> 分享时安卓手机有问题，显示 <code>share:fail:[Share微信分享:-3]Unable to send</code></p>
+<ul>
+<li>
+<p>原因：很可能是 imageUrl 图片过大引起的</p>
+</li>
+<li>
+<p>解决：如果是使用了 OSS 存储图片，那么可以直接使用阿里云的图片处理，将图片压缩一下，对图片的限制最好在 200kb 以下，这里尝试过使用 <a target="_blank" rel="noopener" href="https://uniapp.dcloud.net.cn/api/media/image.html#compressimage"><code>uni.compressImage</code></a> 进行压缩，结果发现图片十分模糊，所以最后还是选择使用阿里云进行压缩</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 使用图片缩放参数，调整OSS内存储的图片大小</span></span><br><span class="line"><span class="comment"> * 操作名称：resize</span></span><br><span class="line"><span class="comment"> * m：缩放的模式</span></span><br><span class="line"><span class="comment"> * lfit：等比缩放，缩放图限制为指定w与h的矩形内的最大图片</span></span><br><span class="line"><span class="comment"> * w：指定目标缩放图的宽度</span></span><br><span class="line"><span class="comment"> * h：指定目标缩放图的高度</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用质量变换操作，修改存储在OSS内原图的质量</span></span><br><span class="line"><span class="comment"> * 操作名称：quality</span></span><br><span class="line"><span class="comment"> * q：设置图片的相对质量，对原图按百分比进行质量压缩</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> imageUrl = <span class="string">`<span class="subst">$&#123;url&#125;</span>?x-oss-process=image/resize,m_lfit,w_750,h_600/quality,q_80`</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>问题 5：app 端分享小程序卡片给好友，小程序卡片的图片十分模糊</p>
+<ul>
+<li>解决：如问题 4，使用阿里云压缩图片</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、其他">四、其他</h2>
+<h3 id="权限和隐私协议">权限和隐私协议</h3>
+<ul>
+<li>uniapp中使用了分享功能，一定要在隐私协议中明确使用的目的、权限和对应的隐私权政策链接，不然审核的时候会被拒，具体可参考<a class="link"   target="_blank" rel="noopener" href="https://uniapp.dcloud.net.cn/app/android-store.html#oauth%E3%80%81share%E3%80%81payment" >uniapp官方文档<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="五、参考链接">五、参考链接</h2>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://uniapp.dcloud.net.cn/api/plugins/share.html#share" >uniapp 分享 API<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://ask.dcloud.net.cn/article/id-287__page-6#reply" >DCloud - 分享错误码<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://uniapp.dcloud.net.cn/tutorial/app-share-weixin.html" >uniapp - App 打包配置 - 功能模块 - 微信分享<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html" >微信官方文档 - iOS 接入指南<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developer.umeng.com/docs/191212/detail/200975" >Universal link 同域不能唤起 app<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://ask.dcloud.net.cn/article/36445" >DCloud - iOS 平台微信 SDK 更新需要配置通用链接（Universal Links）<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.kancloud.cn/qq485377808/taoke/2068409" >微信开放平台申请<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.kancloud.cn/wangking/uniapp/1875048" >uniapp - 配置 iOS 通用链接（Universal Links）<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/b912901fb927" >使用 uni.share 分享时安卓手机出问题，显示 share:fail:[Share 微信分享:-3]Unable to send<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2023/07/07/iOS%20%E9%85%8D%E7%BD%AE%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5(Universal%20Link)/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">iOS 配置通用链接(Universal Link)</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2018</span>&nbsp;-&nbsp;
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">瑾瑾</a>
+        </div>
+        
+        <!-- <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div> -->
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-text">一、相关配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E5%BA%94%E7%94%A8%E6%94%AF%E6%8C%81%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5-Universal-Link"><span class="nav-text">1.配置应用支持通用链接(Universal Link)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9C%A8%E2%80%9C%E5%BE%AE%E4%BF%A1%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E2%80%9D%E9%85%8D%E7%BD%AE%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5-Universal-Link"><span class="nav-text">2.在“微信开放平台”配置通用链接(Universal Link)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%B2%98%E8%B4%B4%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5%E5%88%B0%E5%AF%B9%E5%BA%94%E6%9D%83%E9%99%90%E6%A8%A1%E5%9D%97"><span class="nav-text">3.粘贴通用链接到对应权限模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E9%85%8D%E7%BD%AE-manifest-json"><span class="nav-text">3.1 配置 manifest.json</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8-api-%E4%BB%A3%E7%A0%81"><span class="nav-text">二、使用 api &amp;代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8-uni-share-OBJECT-%E5%8F%91%E8%B5%B7%E5%88%86%E4%BA%AB%E6%93%8D%E4%BD%9C"><span class="nav-text">调用 uni.share(OBJECT) 发起分享操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E7%AD%94"><span class="nav-text">三、常见问题及解答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%85%B6%E4%BB%96"><span class="nav-text">四、其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E5%92%8C%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE"><span class="nav-text">权限和隐私协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-text">五、参考链接</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

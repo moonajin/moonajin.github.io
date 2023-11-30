@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="瑾瑾">
+    
+    <title>
+        
+            阿里云OSS图片处理 |
+        
+        瑾瑾的技术分享博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"moonajin.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+                瑾瑾的技术分享博客
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">阿里云OSS图片处理</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">瑾瑾</span>
+                        
+                            <span class="author-label">前端开发工程师</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+  <span class="article-date article-meta-item">
+    <i class="fas fa-edit"></i>&nbsp;2021-06-01
+  </span>
+  
+  <span class="article-categories article-meta-item">
+    <i class="fas fa-folder"></i>&nbsp;
+    <ul>
+      
+      <li>
+        <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91OSS/"
+          >阿里云OSS</a
+        >&nbsp;
+      </li>
+      
+    </ul>
+  </span>
+       
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="OSS-图片处理参数">OSS 图片处理参数 <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h2>
+<h3 id="1、图片缩放">1、图片缩放</h3>
+<h4 id="1-1、常用参数">1.1、常用参数</h4>
+<ul>
+<li>操作名称：<code>resize</code></li>
+<li>指定宽高缩放
+<ul>
+<li><code>m</code>：指定缩放模式
+<ul>
+<li><code>lfit</code>（默认值）：等比缩放，缩放图限制为指定 w 与 h 的矩形内的最大图片，即缩放图的 w*h 不能大于指定的 w*h</li>
+<li><code>mfit</code>：等比缩放，缩放图为延伸出指定 w 与 h 的矩形框外的最小图片，即缩放图是大于指定的 w*h 的一个最小矩形</li>
+<li><code>fill</code>：等比缩放，将原图等比缩放为延伸出指定 w 与 h 的矩形框外的最小图片，之后将超出的部分进行居中裁剪</li>
+<li><code>pad</code>：将原图缩放为指定 w 与 h 的矩形内的最大图片，之后使用指定颜色居中填充空白部分</li>
+<li><code>fixed</code>：固定宽高，强制缩放，如果指定宽高与原图宽高比例不同，则会导致图片变形</li>
+</ul>
+</li>
+<li><code>w</code>：指定缩放图宽度
+<ul>
+<li>取值范围：[1,4096]</li>
+</ul>
+</li>
+<li><code>h</code>：指定缩放图高度
+<ul>
+<li>取值范围：[1,4096]</li>
+</ul>
+</li>
+<li><code>limit</code>：指定当目标缩放图大于原图时是否进行缩放
+<ul>
+<li><code>1</code>（默认值）：不按指定参数进行缩放，直接返回原图</li>
+<li><code>0</code>：按指定参数进行缩放</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>按比例缩放
+<ul>
+<li><code>p</code>：按百分比缩放，取值范围<code>[1,1000]</code>，小于 100 为缩小，大于 100 为放大</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2、实例">1.2、实例</h4>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原图</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg`</span>;</span><br><span class="line"><span class="comment">// lfit</span></span><br><span class="line"><span class="keyword">const</span> imgUrl_lfit = <span class="string">`http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,m_lfit,w_100,h_100`</span>;</span><br><span class="line"><span class="comment">// mfit</span></span><br><span class="line"><span class="keyword">const</span> imgUrl_mfit = <span class="string">`http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,m_mfit,w_100,h_100`</span>;</span><br><span class="line"><span class="comment">// fill</span></span><br><span class="line"><span class="keyword">const</span> imgUrl_fill = <span class="string">`http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,m_fill,w_100,h_100`</span>;</span><br><span class="line"><span class="comment">// pad</span></span><br><span class="line"><span class="comment">// 以红色填充：color_FF0000</span></span><br><span class="line"><span class="keyword">const</span> imgUrl_pad = <span class="string">`http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,m_pad,w_100,h_100,color_FF0000`</span>;</span><br><span class="line"><span class="comment">// fixed</span></span><br><span class="line"><span class="keyword">const</span> imgUrl_fixed = <span class="string">`http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,m_fixed,w_100,h_100`</span>;</span><br><span class="line"><span class="comment">// p</span></span><br><span class="line"><span class="keyword">const</span> imgUrl_p = <span class="string">`http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,p_50`</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="2、图片质量">2、图片质量</h3>
+<h4 id="2-1、常用参数">2.1、常用参数</h4>
+<ul>
+<li>操作名称：<code>quality</code></li>
+<li><code>q</code>：设置图片的相对质量，对原图按百分比进行质量压缩
+<ul>
+<li>取值范围：[1,100]</li>
+<li>只有 JPG 格式的原图添加该参数，才可以决定图片的相对质量</li>
+<li>如果原图为 WebP 格式，添加该参数相当于指定了原图绝对质量，即与参数 <code>Q</code> 的作用相同</li>
+</ul>
+</li>
+<li><code>Q</code>：设置图片的绝对质量，将原图质量压缩至 Q%，如果原图质量小于指定参数值，则按照原图质量重新进行压缩
+<ul>
+<li>取值范围：[1,100]</li>
+<li>该参数只能对保存格式为 JPG、WebP 的图片使用，对其他格式的图片无效</li>
+</ul>
+</li>
+<li>如果同时指定了<code>q</code>和<code>Q</code>，会按照<code>Q</code>的值进行处理</li>
+</ul>
+<h4 id="2-2、实例">2.2、实例</h4>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原图</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg`</span>;</span><br><span class="line"><span class="comment">// q</span></span><br><span class="line"><span class="keyword">const</span> imgUrl_q = <span class="string">`https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,w_100/quality,q_80`</span>;</span><br><span class="line"><span class="comment">// Q</span></span><br><span class="line"><span class="keyword">const</span> imgUrl_Q = <span class="string">`https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,w_100/quality,Q_80`</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="3、图片水印">3、图片水印</h3>
+<h4 id="3-1、常用参数">3.1、常用参数</h4>
+<ul>
+<li>操作名称：<code>watermark</code></li>
+<li>基础参数
+<ul>
+<li><code>t</code>：指定图片水印或水印文字的透明度
+<ul>
+<li>取值范围：[0,100]</li>
+<li>默认值：100，表示透明度 100%，即不透明</li>
+</ul>
+</li>
+<li><code>g</code>：指定水印在图片中的位置
+<ul>
+<li>nw：左上</li>
+<li>north：中上</li>
+<li>ne：右上</li>
+<li>west：左中</li>
+<li>center：中部</li>
+<li>east：右中</li>
+<li>sw：左下</li>
+<li>south：中下</li>
+<li>se：右下</li>
+</ul>
+</li>
+<li><code>x</code>：指定水印的水平边距，距离图片边缘的水平距离
+<ul>
+<li>只有当水印位置是左上、左中、左下、右上、右中、右下才有效</li>
+<li>[0,4096]</li>
+<li>默认值：10，单位：px</li>
+</ul>
+</li>
+<li><code>y</code>：指定水印的垂直边距，距离图片边缘的垂直距离
+<ul>
+<li>只有当水印位置是左上、中上、右上、左下、中下、右下才有效</li>
+<li>[0,4096]</li>
+<li>默认值：10，单位：px</li>
+</ul>
+</li>
+<li><code>voffest</code>：指定水印的中线垂直偏移
+<ul>
+<li>当水印位置在左中、中部、右中时，可以指定水印位置根据中线往上或者往下偏移</li>
+<li>[-1000,1000]</li>
+<li>默认值：0，单位：px</li>
+</ul>
+</li>
+<li>区域数值以及每个区域对应的基准点如下图所示：<br>
+<img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0%E5%9F%BA%E5%87%86%E7%82%B9.png" alt="图片水印基准点"></li>
+</ul>
+</li>
+<li>图片水印参数
+<ul>
+<li><code>image</code>：用于指定作为图片水印 Object 的完整名称
+<ul>
+<li>Object 名称需进行 Base64 编码</li>
+<li>例如，作为图片水印的 Object 为 Bucket 内 image 目录下的 panda.png，则需要编码的内容为<code>image/panda.png</code>，编码后的字符串为<code>aW1hZ2UvcGFuZGEucG5n</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>文字水印参数
+<ul>
+<li><code>text</code>：指定文字水印的文字内容
+<ul>
+<li>文字内容需进行 Base64 编码</li>
+<li>最大长度为 64 个字符（最多 21 个汉字）</li>
+</ul>
+</li>
+<li><code>type</code>：指定文字水印的字体
+<ul>
+<li>字体名称需进行 Base64 编码</li>
+<li>默认值：<code>wqy-zenhei</code>，编码后的值为<code>d3F5LXplbmhlaQ</code></li>
+</ul>
+</li>
+<li><code>color</code>：指定文字水印的文字颜色
+<ul>
+<li>参数值为 RGB 颜色值</li>
+<li>默认值：000000（黑色）</li>
+</ul>
+</li>
+<li><code>size</code>：指定文字水印的文字大小
+<ul>
+<li>取值范围：[0,1000]</li>
+<li>默认值：40，单位：px</li>
+</ul>
+</li>
+<li><code>shadow</code>：指定文字水印的阴影透明度
+<ul>
+<li>取值范围：[0,100]</li>
+<li>默认值：0，表示没有阴影</li>
+</ul>
+</li>
+<li><code>rotate</code>：指定文字顺时针旋转角度
+<ul>
+<li>取值范围：[0,360]</li>
+<li>默认值：0，表示不旋转</li>
+</ul>
+</li>
+<li><code>fill</code>：指定是否将文字水印铺满原图
+<ul>
+<li><code>0</code>（默认值）：表示不将文字水印铺满全图</li>
+<li><code>1</code>：表示将文字水印铺满原图</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图文混合水印参数
+<ul>
+<li><code>order</code>：指定文字和图片水印的前后顺序
+<ul>
+<li><code>0</code>（默认值）：表示图片水印在前</li>
+<li><code>1</code>：表示文字水印在前</li>
+</ul>
+</li>
+<li><code>align</code>：指定文字水印和图片水印的对齐方式
+<ul>
+<li><code>2</code>（默认值）：表示文字水印和图片水印下对齐</li>
+<li><code>1</code>：表示文字水印和图片水印中对齐</li>
+<li><code>0</code>：表示文字水印和图片水印上对齐</li>
+</ul>
+</li>
+<li><code>interval</code>：指定文字水印和图片水印间的间距
+<ul>
+<li>取值范围：[0,1000]</li>
+<li>默认值：0，单位：px</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>编码工具推荐：<a class="link"   target="_blank" rel="noopener" href="https://simplycalc.com/base64url-encode.php?spm=a2c4g.11186623.2.18.140d6730x8PRYO" >Base64 编码工具<i class="fas fa-external-link-alt"></i></a></p>
+<h4 id="3-2、注意事项">3.2、注意事项</h4>
+<ul>
+<li>图片水印只能使用当前存储空间内的图片，网络或本地图片需上传至当前存储空间内方可使用</li>
+<li>图片水印目前仅支持 JPG、PNG、BMP、WebP、TIFF 格式，不支持 GIF 格式</li>
+<li>单张图片最多支持添加 3 张不同的图片水印，且各个图片水印的位置不能完全重叠</li>
+<li>文字水印暂不支持繁体中文</li>
+</ul>
+<h4 id="3-3、实例">3.3、实例</h4>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原图</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo-oss-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/example.jpg`</span>;</span><br><span class="line"><span class="comment">// 文字水印</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo-oss-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/example.jpg?x-oss-process=image/resize,w_300,h_300/watermark,type_d3F5LXplbmhlaQ,size_30,text_SGVsbG8gV29ybGQ,color_FFFFFF,shadow_50,t_100,g_se,x_10,y_10`</span>;</span><br><span class="line"><span class="comment">// 图片水印</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo-oss-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/example.jpg?x-oss-process=image/resize,w_300/watermark,image_cGFuZGEucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLFBfMzA,t_90,g_se,x_10,y_10`</span>;</span><br><span class="line"><span class="comment">// 混合水印</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo-oss-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/example.jpg?x-oss-process=image/watermark,image_cGFuZGEucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLFBfMzA,text_SGVsbG8gV29ybGQ`</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="4、图片格式">4、图片格式</h3>
+<h4 id="4-1、常用参数">4.1、常用参数</h4>
+<ul>
+<li>操作名称：<code>format</code></li>
+<li><code>jpg</code>：将原图保存成 JPG 格式，如果原图是 PNG、WebP、BMP 等存在透明通道的格式，默认会把透明填充成白色</li>
+<li><code>png</code>：将原图保存成 PNG 格式</li>
+<li><code>webp</code>：将原图保存成 WebP 格式</li>
+<li><code>bmp</code>：将原图保存成 BMP 格式</li>
+<li><code>gif</code>：原图为 GIF 图片则继续保存为 GIF 格式；原图不是 GIF 图片，则按原图格式保存</li>
+<li><code>tiff</code>：将原图保存成 TIFF 格式</li>
+</ul>
+<h4 id="4-2、注意事项">4.2、注意事项</h4>
+<ul>
+<li>图片处理包含缩放操作时，建议将格式转换参数放到处理参数的最后，例如<code>image/resize,w_100/format,jpg</code></li>
+<li>图片处理包含缩放和水印操作时，建议将格式转换参数添加在缩放参数之后，例如<code>image/reisze,w_100/format,jpg/watermark,...</code></li>
+</ul>
+<h4 id="4-3、实例">4.3、实例</h4>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原图</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.gif`</span>;</span><br><span class="line"><span class="comment">// JPG</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.gif?x-oss-process=image/interlace,1/format,jpg`</span>;</span><br><span class="line"><span class="comment">// PNG</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.gif?x-oss-process=image/format,png`</span>;</span><br><span class="line"><span class="comment">// webp</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">`https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.gif?x-oss-process=image/resize,w_200/format,webp`</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>参考链接：
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/44688.html?spm=a2c4g.11186623.6.736.41847055V4gKjK" >阿里云 OSS 文档<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</li>
+</ul>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><ul>
+<li>注意事项
+<ul>
+<li>图片格式只能是：<code>JPG</code>、<code>PNG</code>、<code>BMP</code>、<code>GIF</code>、<code>WebP</code>、<code>TIFF</code></li>
+<li>其中 <code>GIF</code> 格式的图片支持指定宽高缩放，不支持等比缩放（等比缩放情况下，动态图会变成静态图）</li>
+<li>原图大小不能超过 20 MB</li>
+</ul>
+</li>
+</ul>
+ <a href="#fnref1" class="footnote-backref">↩︎</a></li>
+</ol>
+</section>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/06/02/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%A4%84%E7%90%86/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">小程序图片加载失败的处理</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/05/22/VUE%E6%BB%91%E5%8A%A8%E5%88%B0%E5%BA%95%E9%83%A8%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%A4%9A/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">VUE滑动到底部加载更多</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2018</span>&nbsp;-&nbsp;
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">瑾瑾</a>
+        </div>
+        
+        <!-- <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div> -->
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSS-%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0"><span class="nav-text">OSS 图片处理参数 [1]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9B%BE%E7%89%87%E7%BC%A9%E6%94%BE"><span class="nav-text">1、图片缩放</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1%E3%80%81%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-text">1.1、常用参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2%E3%80%81%E5%AE%9E%E4%BE%8B"><span class="nav-text">1.2、实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%9B%BE%E7%89%87%E8%B4%A8%E9%87%8F"><span class="nav-text">2、图片质量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1%E3%80%81%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-text">2.1、常用参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2%E3%80%81%E5%AE%9E%E4%BE%8B"><span class="nav-text">2.2、实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0"><span class="nav-text">3、图片水印</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1%E3%80%81%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-text">3.1、常用参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">3.2、注意事项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3%E3%80%81%E5%AE%9E%E4%BE%8B"><span class="nav-text">3.3、实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F"><span class="nav-text">4、图片格式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1%E3%80%81%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-text">4.1、常用参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">4.2、注意事项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3%E3%80%81%E5%AE%9E%E4%BE%8B"><span class="nav-text">4.3、实例</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

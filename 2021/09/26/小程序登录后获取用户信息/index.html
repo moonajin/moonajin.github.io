@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="瑾瑾">
+    
+    <title>
+        
+            小程序登录后获取用户信息 |
+        
+        瑾瑾的技术分享博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"moonajin.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+                瑾瑾的技术分享博客
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">小程序登录后获取用户信息</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">瑾瑾</span>
+                        
+                            <span class="author-label">前端开发工程师</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+  <span class="article-date article-meta-item">
+    <i class="fas fa-edit"></i>&nbsp;2021-09-26
+  </span>
+  
+  <span class="article-categories article-meta-item">
+    <i class="fas fa-folder"></i>&nbsp;
+    <ul>
+      
+      <li>
+        <a href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"
+          >小程序</a
+        >&nbsp;
+      </li>
+      
+    </ul>
+  </span>
+       
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <blockquote>
+<p>小程序的登录方式，比较常见的有<strong>手机号授权登录</strong>和<strong>用户信息授权登录</strong>，通常会根据不同的业务需求选择不同的登录方式，但有时可能会需要在登录时既获取用户的手机号又获取用户的个人信息，那么该怎么做呢？</p>
+</blockquote>
+<h2 id="背景介绍">背景介绍</h2>
+<p>由于“获取手机号”接口和“获取用户信息”接口都需要用户主动触发，用户同意后才会返回相应的信息，所以不能用一个按钮同时实现这两个需求，至少要用户点击两次按钮才能完成。</p>
+<p>本篇文章实现的登录逻辑为用户必须授权手机号才能成功登录，如果是新用户那么需要用户授权个人信息，如果是老用户则不需要，是否授权个人信息不影响登录结果，即分为以下几种情况进行处理：</p>
+<ul>
+<li>用户拒绝授权手机号，登录失败</li>
+<li>用户同意授权手机号，登录成功
+<ul>
+<li>用户为新用户，弹出获取用户信息弹窗
+<ul>
+<li>用户拒绝授权个人信息，使用默认头像昵称等信息</li>
+<li>用户同意授权个人信息，使用微信授权头像昵称等信息</li>
+</ul>
+</li>
+<li>用户为老用户，直接登录成功，不弹弹窗</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：2021 年 4 月起，小程序对<a class="link"   target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/doc/000cacfa20ce88df04cb468bc52801?highLine=login" >“获取用户信息”的接口进行了调整<i class="fas fa-external-link-alt"></i></a>，回收了 <code>wx.getUserInfo</code> 接口可获取用户授权的个人信息能力，新增了 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/wx.getUserProfile.html"><code>wx.getUserProfile</code></a> 接口，开发者每次通过该接口获取用户个人信息均需用户确认。所以接下来获取用户信息都用 <code>wx.getUserProfile</code> 实现。</p>
+</blockquote>
+<h2 id="微信手机号授权一键登录">微信手机号授权一键登录</h2>
+<p>微信手机号授权一键登录之前写过一篇文章，就不赘述了，可以<a class="link"   target="_blank" rel="noopener" href="https://www.jinjin.link/2020/04/18/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/" >戳这里查看<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="获取用户信息">获取用户信息</h2>
+<p>获取用户信息继续在上述<a class="link"   target="_blank" rel="noopener" href="https://www.jinjin.link/2020/04/18/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/" >微信手机号授权一键登录<i class="fas fa-external-link-alt"></i></a>中进行改造</p>
+<h3 id="判断是否为新用户">判断是否为新用户</h3>
+<ul>
+<li>用户同意授权手机号，登录成功后我们可以拿到用户 token 和用户是否为新用户等信息（后台返回），如果是新用户，则弹出获取用户信息弹窗，如果是老用户，则直接登录成功进行页面跳转，不弹弹窗。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码片段</span></span><br><span class="line"><span class="comment">// 发起网络请求</span></span><br><span class="line">wx.request(&#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>, <span class="comment">// 请求方法</span></span><br><span class="line">  <span class="attr">url</span>: <span class="string">&quot;&quot;</span>, <span class="comment">// 请求url</span></span><br><span class="line">  <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 接口调用成功的回调函数</span></span><br><span class="line">    <span class="keyword">if</span> (res &amp;&amp; res.data &amp;&amp; res.data.userInfo &amp;&amp; res.data.userInfo.token) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">parseInt</span>(res.data.userInfo.newUser) === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 如果是新用户，弹出获取用户信息弹窗</span></span><br><span class="line">        <span class="comment">// ...弹窗逻辑</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果是老用户，直接返回上级页面</span></span><br><span class="line">        <span class="keyword">let</span> pages = getCurrentPages(); <span class="comment">/*在内存中的所有页面栈对象*/</span></span><br><span class="line">        <span class="keyword">let</span> prePage = pages[pages.length - <span class="number">2</span>]; <span class="comment">/*我的页面对象*/</span></span><br><span class="line">        <span class="keyword">if</span> (prePage) &#123;</span><br><span class="line">          wx.navigateBack(&#123;</span><br><span class="line">            <span class="comment">// 关闭当前页面，返回上一页面</span></span><br><span class="line">            <span class="attr">success</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">              <span class="comment">// 执行前一页面的onLoad方法</span></span><br><span class="line">              prePage.onLoad();</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          wx.navigateBack(); <span class="comment">// 关闭当前页面，返回上一页面</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="发起一个弹窗用于触发-wx-getUserProfile">发起一个弹窗用于触发 <code>wx.getUserProfile</code></h3>
+<ul>
+<li>因为 <code>wx.getUserProfile</code> 必须是页面产生点击事件后才可调用，所以在登录成功的回调里我们需要<strong>发起一个弹窗用于触发 <code>wx.getUserProfile</code></strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码片段</span></span><br><span class="line"><span class="comment">// 获取用户信息弹窗按钮</span></span><br><span class="line">wx.showModal(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;提示&quot;</span>,</span><br><span class="line">  <span class="attr">content</span>:</span><br><span class="line">    <span class="string">&quot;检查到您是首次使用小程序，我们希望获得您的个人信息，以便为您提供更好的服务&quot;</span>,</span><br><span class="line">  <span class="attr">showCancel</span>: <span class="literal">false</span>, <span class="comment">// 是否显示取消按钮</span></span><br><span class="line">  <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 用户点击了确定</span></span><br><span class="line">    <span class="keyword">if</span> (res.confirm) &#123;</span><br><span class="line">      wx.getUserProfile(&#123;</span><br><span class="line">        <span class="attr">desc</span>: <span class="string">&quot;用于完善用户资料&quot;</span>, <span class="comment">// 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写</span></span><br><span class="line">        <span class="attr">success</span>: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 用户同意授权</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">fail</span>: <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 用户拒绝授权</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">complete</span>: <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 接口调用结束（调用成功、失败都会执行）</span></span><br><span class="line">          <span class="comment">// ...授权逻辑</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="对用户是否同意授权个人信息处理">对用户是否同意授权个人信息处理</h3>
+<ul>
+<li>到这一步，我们已经拿到用户手机号并登录成功了，所以不管用户是否同意授权个人信息，都不影响登录结果。有一个统一的逻辑是不管用户点同意还是拒绝，最后都要进行登录成功的页面跳转，因此这部分逻辑我们在 <code>wx.getUserProfile</code> 的 <code>complete</code>回调里进行处理。</li>
+<li>如果用户同意授权，那么将调用<em>更改用户个人信息接口</em>，对用户的个人信息进行更新；如果用户拒绝授权，那么则使用默认的头像昵称等信息，不进行更新。最后进行登录成功的页面跳转。</li>
+<li>因为调用接口是个异步操作，我们要等接口调用成功才能进行下一步操作，所以这里使用了 <code>async</code> 和 <code>await</code> 进行处理。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码片段</span></span><br><span class="line"><span class="comment">// 获取用户个人信息</span></span><br><span class="line">wx.getUserProfile(&#123;</span><br><span class="line">  <span class="attr">desc</span>: <span class="string">&quot;用于完善用户资料&quot;</span>, <span class="comment">// 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写</span></span><br><span class="line">  <span class="attr">complete</span>: <span class="keyword">async</span> e =&gt; &#123;</span><br><span class="line">    <span class="comment">// 接口调用结束（调用成功、失败都会执行）</span></span><br><span class="line">    <span class="keyword">if</span> (e &amp;&amp; e.errMsg.includes(<span class="string">&quot;ok&quot;</span>) &amp;&amp; e.userInfo &amp;&amp; <span class="built_in">Object</span>.keys(e.userInfo)) &#123;</span><br><span class="line">      <span class="comment">// 返回消息里包含 ok 即允许授权</span></span><br><span class="line">      <span class="comment">// 用户允许授权</span></span><br><span class="line">      <span class="keyword">await</span> wx.request(&#123;</span><br><span class="line">        <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>, <span class="comment">// 请求方法</span></span><br><span class="line">        <span class="attr">url</span>: <span class="string">&quot;&quot;</span>, <span class="comment">// 请求url</span></span><br><span class="line">        <span class="attr">data</span>: &#123;</span><br><span class="line">          <span class="attr">userName</span>: e.userInfo.nickName, <span class="comment">// 昵称</span></span><br><span class="line">          <span class="attr">avatar</span>: e.userInfo.avatarUrl <span class="comment">// 头像url</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">          <span class="comment">// 接口调用成功的回调函数</span></span><br><span class="line">          <span class="keyword">if</span> (res &amp;&amp; res.data &amp;&amp; res.data.userInfo &amp;&amp; res.data.userInfo.token) &#123;</span><br><span class="line">            <span class="comment">// 更新存储个人信息</span></span><br><span class="line">            wx.setStorageSync(<span class="string">&quot;userInfo&quot;</span>, res.data.userInfo);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回上级页面</span></span><br><span class="line">    <span class="keyword">let</span> pages = getCurrentPages(); <span class="comment">/*在内存中的所有页面栈对象*/</span></span><br><span class="line">    <span class="keyword">let</span> prePage = pages[pages.length - <span class="number">2</span>]; <span class="comment">/*我的页面对象*/</span></span><br><span class="line">    <span class="keyword">if</span> (prePage) &#123;</span><br><span class="line">      wx.navigateBack(&#123;</span><br><span class="line">        <span class="comment">// 关闭当前页面，返回上一页面</span></span><br><span class="line">        <span class="attr">success</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 执行前一页面的onLoad方法</span></span><br><span class="line">          prePage.onLoad();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      wx.navigateBack(); <span class="comment">// 关闭当前页面，返回上一页面</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="完整代码">完整代码</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// login.js</span></span><br><span class="line"><span class="comment">// 手机号登录并获取个人信息</span></span><br><span class="line"><span class="function"><span class="title">wxLogin</span>(<span class="params">code, encryptedData, iv</span>)</span> &#123;</span><br><span class="line">  wx.showLoading(&#123; <span class="comment">// 显示登录 loading</span></span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;努力登录中...&#x27;</span>,</span><br><span class="line">    <span class="attr">mask</span>: <span class="literal">true</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 发起网络请求</span></span><br><span class="line">  wx.request(&#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>, <span class="comment">// 请求方法</span></span><br><span class="line">    <span class="attr">url</span>: <span class="string">&quot;https://example.com/wxLogin&quot;</span>, <span class="comment">// 请求url</span></span><br><span class="line">    <span class="attr">data</span>: &#123; <span class="comment">// 请求参数</span></span><br><span class="line">      code, <span class="comment">// 临时登录凭证 code</span></span><br><span class="line">      encryptedData, <span class="comment">// 用户信息加密数据</span></span><br><span class="line">      iv <span class="comment">// 加密算法的初始向量</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123; <span class="comment">// 接口调用成功的回调函数</span></span><br><span class="line">      wx.hideLoading(); <span class="comment">// 隐藏 loading 提示框</span></span><br><span class="line">      <span class="keyword">if</span> (res &amp;&amp; res.data &amp;&amp; res.data.userInfo &amp;&amp; res.data.userInfo.token) &#123;</span><br><span class="line">        <span class="comment">// 将 用户信息 和 token 存储在本地缓存中</span></span><br><span class="line">        wx.setStorageSync(<span class="string">&#x27;userInfo&#x27;</span>, res.data.userInfo);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">parseInt</span>(data.userInfo.newUser) === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 如果是新用户，弹出获取用户信息弹窗</span></span><br><span class="line">        <span class="comment">// 获取用户信息弹窗按钮</span></span><br><span class="line">        wx.showModal(&#123;</span><br><span class="line">          <span class="attr">title</span>: <span class="string">&#x27;提示&#x27;</span>,</span><br><span class="line">          <span class="attr">content</span>: <span class="string">&#x27;检查到您是首次使用小程序，我们希望获得您的个人信息，以便为您提供更好的服务&#x27;</span>,</span><br><span class="line">          <span class="attr">showCancel</span>: <span class="literal">false</span>, <span class="comment">// 是否显示取消按钮</span></span><br><span class="line">          <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span> &#123;</span><br><span class="line">            <span class="comment">// 用户点击确定</span></span><br><span class="line">            <span class="keyword">if</span> (res.confirm) &#123;</span><br><span class="line">              <span class="comment">// 获取用户个人信息</span></span><br><span class="line">              wx.getUserProfile(&#123;</span><br><span class="line">                <span class="attr">desc</span>: <span class="string">&#x27;用于完善用户资料&#x27;</span>, <span class="comment">// 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写</span></span><br><span class="line">                <span class="attr">complete</span>: <span class="keyword">async</span> (e) =&gt; &#123;</span><br><span class="line">                  <span class="comment">// 返回消息里包含 ok 即允许授权</span></span><br><span class="line">                  <span class="keyword">if</span> (e &amp;&amp; e.errMsg.includes(<span class="string">&#x27;ok&#x27;</span>) &amp;&amp; e.userInfo &amp;&amp; <span class="built_in">Object</span>.keys(e.userInfo)) &#123;</span><br><span class="line">                    <span class="comment">// 用户允许授权</span></span><br><span class="line">                    wx.showLoading(&#123;</span><br><span class="line">                      <span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span>,</span><br><span class="line">                      <span class="attr">mask</span>: <span class="literal">true</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                    <span class="keyword">await</span> wx.request(&#123;</span><br><span class="line">                      <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>, <span class="comment">// 请求方法</span></span><br><span class="line">                      <span class="attr">url</span>: <span class="string">&quot;&quot;</span>, <span class="comment">// 请求url</span></span><br><span class="line">                      <span class="attr">data</span>: &#123;</span><br><span class="line">                        <span class="attr">userName</span>: e.userInfo.nickName, <span class="comment">// 昵称</span></span><br><span class="line">                        <span class="attr">avatar</span>: e.userInfo.avatarUrl <span class="comment">// 头像url</span></span><br><span class="line">                      &#125;,</span><br><span class="line">                      <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                        <span class="comment">// 接口调用成功的回调函数</span></span><br><span class="line">                        <span class="keyword">if</span> (res &amp;&amp; res.data &amp;&amp; res.data.userInfo &amp;&amp; res.data.userInfo.token) &#123;</span><br><span class="line">                          <span class="comment">// 更新存储个人信息</span></span><br><span class="line">                          wx.setStorageSync(<span class="string">&quot;userInfo&quot;</span>, res.data.userInfo);</span><br><span class="line">                        &#125;</span><br><span class="line">                      &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                    wx.hideLoading(); <span class="comment">// 隐藏 loading 提示框</span></span><br><span class="line">                  &#125;</span><br><span class="line">                  <span class="comment">// 返回上级页面</span></span><br><span class="line">                  <span class="keyword">let</span> pages = getCurrentPages(); <span class="comment">/*在内存中的所有页面栈对象*/</span></span><br><span class="line">                  <span class="keyword">let</span> prePage = pages[pages.length - <span class="number">2</span>]; <span class="comment">/*我的页面对象*/</span></span><br><span class="line">                  <span class="keyword">if</span> (prePage) &#123;</span><br><span class="line">                    wx.navigateBack(&#123; <span class="comment">// 关闭当前页面，返回上一页面</span></span><br><span class="line">                      <span class="attr">success</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                        <span class="comment">// 执行前一页面的onLoad方法</span></span><br><span class="line">                        prePage.onLoad();</span><br><span class="line">                      &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    wx.navigateBack(); <span class="comment">// 关闭当前页面，返回上一页面</span></span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果是老用户，直接返回上级页面</span></span><br><span class="line">        <span class="keyword">let</span> pages = getCurrentPages(); <span class="comment">/*在内存中的所有页面栈对象*/</span></span><br><span class="line">        <span class="keyword">let</span> prePage = pages[pages.length - <span class="number">2</span>]; <span class="comment">/*我的页面对象*/</span></span><br><span class="line">        <span class="keyword">if</span> (prePage) &#123;</span><br><span class="line">          wx.navigateBack(&#123;</span><br><span class="line">            <span class="attr">success</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">              <span class="comment">// 执行前一页面的onLoad方法</span></span><br><span class="line">              prePage.onLoad();</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          wx.navigateBack();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 如果没有token和用户信息，则登录失败</span></span><br><span class="line">      wx.showModal(&#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;提示&quot;</span>, <span class="comment">// 提示的标题</span></span><br><span class="line">        <span class="attr">content</span>: <span class="string">&quot;登录失败，请重新登录&quot;</span>, <span class="comment">// 提示的内容</span></span><br><span class="line">        <span class="attr">showCancel</span>: <span class="literal">false</span> <span class="comment">// 是否显示取消按钮</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">fail</span>: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123; <span class="comment">// 接口调用失败的回调函数</span></span><br><span class="line">      wx.hideLoading(); <span class="comment">// 隐藏 loading 提示框</span></span><br><span class="line">      wx.showModal(&#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;提示&quot;</span>, <span class="comment">// 提示的标题</span></span><br><span class="line">        <span class="attr">content</span>: (e &amp;&amp; e.msg) || <span class="string">&quot;登录失败，请重新登录&quot;</span>, <span class="comment">// 提示的内容</span></span><br><span class="line">        <span class="attr">showCancel</span>: <span class="literal">false</span> <span class="comment">// 是否显示取消按钮</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="登录后更新用户个人信息">登录后更新用户个人信息</h2>
+<p>因为现在的登录逻辑为只有新用户才弹出授权个人信息弹窗，即只有用户第一次登录小程序才会获取用户个人信息，那么存储在数据库的用户信息，一直都是第一次获取的用户信息，哪怕用户修改了微信的昵称和头像，服务器储存的用户信息也还是以前的。总是显示以前的用户信息，体验不好；但如果每次都让用户授权，体验也不好，因此我们可以给用户留一个手动更新用户信息的入口，如果用户有更新个人信息的需求可以自己进行手动更新。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my.js</span></span><br><span class="line"><span class="comment">// 更新用户头像</span></span><br><span class="line"><span class="function"><span class="title">updateAvatar</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  wx.getUserProfile(&#123;</span><br><span class="line">    <span class="attr">desc</span>: <span class="string">&#x27;用于完善用户资料&#x27;</span>, <span class="comment">// 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写</span></span><br><span class="line">    <span class="attr">success</span>: <span class="keyword">async</span> (res) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (res &amp;&amp; res.userInfo &amp;&amp; <span class="built_in">Object</span>.keys(res.userInfo)) &#123;</span><br><span class="line">        <span class="comment">// 用户允许授权</span></span><br><span class="line">        wx.showLoading(&#123;</span><br><span class="line">          <span class="attr">title</span>: <span class="string">&#x27;更新中...&#x27;</span>,</span><br><span class="line">          <span class="attr">mask</span>: <span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">await</span> wx.request(&#123;</span><br><span class="line">          <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>, <span class="comment">// 请求方法</span></span><br><span class="line">          <span class="attr">url</span>: <span class="string">&quot;&quot;</span>, <span class="comment">// 请求url</span></span><br><span class="line">          <span class="attr">data</span>: &#123;</span><br><span class="line">            <span class="attr">avatar</span>: res.userInfo.avatarUrl <span class="comment">// 头像url</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 接口调用成功的回调函数</span></span><br><span class="line">            <span class="keyword">if</span> (e &amp;&amp; e.data &amp;&amp; e.data.userInfo &amp;&amp; e.data.userInfo.token) &#123;</span><br><span class="line">              <span class="comment">// 更新存储个人信息</span></span><br><span class="line">              wx.setStorageSync(<span class="string">&quot;userInfo&quot;</span>, e.data.userInfo);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        wx.hideLoading();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="文章推荐">文章推荐</h2>
+<p>在社区看到几篇写得很好的文章，分享记录一下：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/article/doc/00062eab0508684539cba249f59413">登录接口又双叕变了，三行代码挑战全网最少修改工作量<br>
+</a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/article/doc/00000cc422c12844b4fb644d056813" >wx.getUserProfile 修改方案<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/doc/00080cd4604440d470fb2744f51800" >wx.getUserProfile 不能和 wx.login 一起使用？<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/10/15/VUE%E4%B8%AD%E5%B0%86px%E8%BD%AC%E6%88%90rem%E5%8D%95%E4%BD%8D/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">VUE中将px转成rem单位</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E4%BA%AB%E5%8F%8A%E5%B0%81%E8%A3%85/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">微信小程序自定义分享及封装</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2018</span>&nbsp;-&nbsp;
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">瑾瑾</a>
+        </div>
+        
+        <!-- <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div> -->
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D"><span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E4%BF%A1%E6%89%8B%E6%9C%BA%E5%8F%B7%E6%8E%88%E6%9D%83%E4%B8%80%E9%94%AE%E7%99%BB%E5%BD%95"><span class="nav-text">微信手机号授权一键登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="nav-text">获取用户信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E6%96%B0%E7%94%A8%E6%88%B7"><span class="nav-text">判断是否为新用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E8%B5%B7%E4%B8%80%E4%B8%AA%E5%BC%B9%E7%AA%97%E7%94%A8%E4%BA%8E%E8%A7%A6%E5%8F%91-wx-getUserProfile"><span class="nav-text">发起一个弹窗用于触发 wx.getUserProfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E5%90%8C%E6%84%8F%E6%8E%88%E6%9D%83%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86"><span class="nav-text">对用户是否同意授权个人信息处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-text">完整代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E5%90%8E%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF"><span class="nav-text">登录后更新用户个人信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E6%8E%A8%E8%8D%90"><span class="nav-text">文章推荐</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="瑾瑾">
+    
+    <title>
+        
+            uniapp项目运行到Android模拟器 |
+        
+        瑾瑾的技术分享博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"moonajin.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+                瑾瑾的技术分享博客
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">uniapp项目运行到Android模拟器</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">瑾瑾</span>
+                        
+                            <span class="author-label">前端开发工程师</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+  <span class="article-date article-meta-item">
+    <i class="fas fa-edit"></i>&nbsp;2022-04-11
+  </span>
+  
+  <span class="article-categories article-meta-item">
+    <i class="fas fa-folder"></i>&nbsp;
+    <ul>
+      
+      <li>
+        <a href="/categories/uniapp/"
+          >uniapp</a
+        >&nbsp;
+      </li>
+      
+    </ul>
+  </span>
+       
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <blockquote>
+<p>用 uniapp 进行 app 开发时，需要安装模拟器进行模拟，ios 模拟器的安装运行比较简单，按照<a class="link"   target="_blank" rel="noopener" href="https://hx.dcloud.net.cn/Tutorial/App/installSimulator?id=simulator" >官方文档<i class="fas fa-external-link-alt"></i></a>的介绍很容易就能运行成功，可是官方文档对于 Android 模拟器的介绍只是一带而过，很多东西都不了解，因此走了很多弯路，所以记录下来以便参考，本文主要记录 Android 模拟器的适配。</p>
+</blockquote>
+<h2 id="环境版本">环境版本</h2>
+<ul>
+<li>Android Studio：macOS 12.3.1</li>
+<li>HbuilderX：3.3.13</li>
+</ul>
+<h2 id="一、Android-Studio">一、Android Studio</h2>
+<h3 id="1-下载并安装-Android-Studio">1.下载并安装 Android Studio</h3>
+<ul>
+<li>首先在官网下载并安装<a class="link"   target="_blank" rel="noopener" href="https://developer.android.com/studio#downloads" >Android Studio<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="2-在-Android-Studio-中安装模拟器">2.在 Android Studio 中安装模拟器</h3>
+<h4 id="2-1-安装模拟器">2.1 安装模拟器</h4>
+<ul>
+<li>
+<p>如需安装 Android 模拟器，可以在 <code>preferencs</code> 中搜索 sdk 关键词，找到 <code>Android SDK</code> ，在 <code>Android SDK</code> 的 <code>SDK Tools</code> 标签页中选择 <code>Android Emulator</code> 组件，点击 <code>Apply</code> 或 <code>OK</code> 进行下载，如有许可协议则同意所有许可协议即可。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/SDK_Tools.png" alt="Android Emulator"></p>
+</li>
+</ul>
+<h4 id="2-2-安装官方推荐的软件包">2.2 安装官方<a class="link"   target="_blank" rel="noopener" href="https://developer.android.com/studio/intro/update#recommended" >推荐的软件包<i class="fas fa-external-link-alt"></i></a></h4>
+<h5 id="2-2-1-SDK-Tools-标签页下的工具">2.2.1 SDK Tools 标签页下的工具</h5>
+<ul>
+<li>Android SDK 构建工具【必需】
+<ul>
+<li>包含构建 Android 应用的工具，具体请参阅<a class="link"   target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/build-tools" >SDK 构建工具版本说明<i class="fas fa-external-link-alt"></i></a>。</li>
+</ul>
+</li>
+<li>Android SDK 平台工具【必需】
+<ul>
+<li>包含 Android 平台所需的各种工具，包括 <a class="link"   target="_blank" rel="noopener" href="https://developer.android.com/studio/command-line/adb" >adb<i class="fas fa-external-link-alt"></i></a> 工具。</li>
+</ul>
+</li>
+<li>Android SDK 工具【必需】
+<ul>
+<li>包括 ProGuard 等基本工具。请参阅 <a class="link"   target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/sdk-tools" >SDK 工具版本说明<i class="fas fa-external-link-alt"></i></a>。</li>
+</ul>
+</li>
+<li>Android 模拟器【推荐】
+<ul>
+<li>基于 QEMU 的设备模拟工具，可用于在实际的 Android 运行时环境中调试和测试应用。请参阅 <a class="link"   target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/emulator" >Android 模拟器版本说明<i class="fas fa-external-link-alt"></i></a>。</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-2-2-SDK-Platforms-标签页下的工具">2.2.2 SDK Platforms 标签页下的工具</h5>
+<ul>
+<li>Android SDK Platform【必需】
+<ul>
+<li>您的开发环境中必须至少有一个版本的 Android 平台，这样您才能构建应用。为了在最新设备上提供最佳用户体验，请使用最新版本的平台作为构建目标。您的应用仍然可以在旧版系统上运行，但您必须以最新版本为目标构建应用，以便在安装最新版 Android 的设备上运行应用时能够使用新功能。</li>
+</ul>
+</li>
+<li>Intel 或 ARM 系统映像【推荐】
+<ul>
+<li>运行 Android 模拟器需要系统映像。每个版本的平台均包含受支持的系统映像。您也可以之后在从 AVD 管理器中创建 Android 虚拟设备 (AVD) 时下载系统映像。根据开发计算机的处理器选择 Intel 或 ARM。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-在-Android-Studio-中创建-Android-虚拟设备">3.在 Android Studio 中创建 Android 虚拟设备</h3>
+<ul>
+<li>
+<p>双击打开 Android Studio；</p>
+</li>
+<li>
+<p>在 Android Studio 欢迎屏幕上，依次选择 <code>More Actions &gt; Virtual Device Manager</code>；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/Virtual_Device_Manager.png" alt="Virtual Device Manager"></p>
+</li>
+<li>
+<p>点击 <code>Create Device</code>；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/Create_Device.jpeg" alt="Create Device"></p>
+</li>
+<li>
+<p>随即会进入到 <code>Select Hardware</code> 窗口，选择所需的虚拟设备硬件配置，然后点击下一步 <code>Next</code>；</p>
+<ul>
+<li>如果未看到自己所需的硬件配置文件，可以创建或导入一个硬件配置文件</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/Select_Hardware.png" alt="Select Hardware"></p>
+</li>
+<li>
+<p>接下来会进入到 <code>System Image</code> 窗口，选择所需的虚拟设备系统映像，如果您看到系统映像旁边的 Download，则需要点击以下载系统映像，不然无法进行下一步。若选择的系统映像不需下载，则可直接点击下一步 <code>Next</code>；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/System_Image.jpeg" alt="System Image"></p>
+</li>
+<li>
+<p>然后会进入到 <code>Android Virtual Device Configuration</code> 窗口，可根据需要更改 AVD 属性，然后点击 <code>Finish</code>完成创建；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/Android_Virtual_Device.jpeg" alt="Virtual Device Configuration"></p>
+</li>
+</ul>
+<h3 id="4-管理-运行虚拟设备">4.管理&amp;运行虚拟设备</h3>
+<ul>
+<li>
+<p>完成后会回到管理虚拟设备的窗口，可以对虚拟设备进行管理；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/Device_Manager.png" alt="Device Manager"></p>
+</li>
+<li>
+<p>点击运行图标可运行对应的虚拟设备</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/Run_AVD.png" alt="Run AVD"></p>
+<blockquote>
+<p>提示：当模拟器运行时，您将能够使用常见模拟器操作（如旋转），以及扩展控制选项（如导航播放）。如需在单独的窗口中运行模拟器，请依次转到 <code>File &gt; Settings &gt; Tools &gt; Emulator</code>（在 macOS 设备中则依次转到 <code>Android Studio &gt; Preferences &gt; Tools &gt; Emulator</code>），并取消选择 <code>Launch in a tool window</code>。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="5-将-uniapp-项目运行到-Android-模拟器">5.将 uniapp 项目运行到 Android 模拟器</h3>
+<ul>
+<li>
+<p>uniapp 项目运行前，要先在 Android Studio 中启动 Android 模拟器，否则 uniapp 是检测不到模拟器的；</p>
+</li>
+<li>
+<p>Android 模拟器启动后，HBuilderX 会将其识别为名称为 <code>emulator-xxxx</code>的 Android 手机；</p>
+</li>
+<li>
+<p>然后在 HbuilderX 中点击 <code>运行 &gt; 运行到手机或模拟器 &gt; 对应的模拟器</code>；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/Run_Uniapp_Android.png" alt="Run Uniapp Android"></p>
+</li>
+</ul>
+<h3 id="6-运行到-Android-模拟器成功">6.运行到 Android 模拟器成功</h3>
+<ul>
+<li>
+<p>项目运行到 Android 模拟器的效果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/Run_Uniapp_Android_Success.jpeg" alt="Run Uniapp Android Success"></p>
+</li>
+<li>
+<p>HbuilderX 控制台输出如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/uniapp_log.png" alt="HbuilderX log"></p>
+</li>
+</ul>
+<h3 id="7-参考链接">7.参考链接</h3>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.csdn.net/tags/NtDagg0sNjA0MzMtYmxvZwO0O0OO0O0O.html" >Android Studio 创建手机虚拟机教程<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developer.android.com/studio/run/managing-avds" >官方文档 - 创建和管理虚拟设备<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="二、网易-MuMu">二、网易 MuMu</h2>
+<h3 id="1-下载并安装网易-MuMu">1.下载并安装网易 MuMu</h3>
+<ul>
+<li>首先在官网下载并安装<a class="link"   target="_blank" rel="noopener" href="https://mumu.163.com/mac/index.html" >网易 MuMu<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="2-配置-adb">2.配置 adb</h3>
+<ul>
+<li>
+<p>使用 Mac 进行开发的时候，如果没有配置过 Android 环境变量，可能会出现<code>adb: command not found</code>，可以按照以下步骤进行解决：</p>
+<ul>
+<li>
+<ol>
+<li>打开 mac 终端，输入 <code>cd ~/</code> ，进入当前用户的 home 目录；</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>输入 <code>touch .bash_profile</code> ，如果没有 <code>.bash_profile</code> 这个文件，则创建一个这个文件；</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>输入 <code>open .bash_profile</code> ，打开创建的这个文件，此时会弹出一个文本编辑框，如果是第一次配置环境，那么文本编辑框为空白；</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>在打开的文本编辑器中写入如下代码：</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export ANDROID_HOME=/Users/用户名/Library/Android/sdk</span><br><span class="line">export PATH=$&#123;PATH&#125;:$&#123;ANDROID_HOME&#125;/tools</span><br><span class="line">export PATH=$&#123;PATH&#125;:$&#123;ANDROID_HOME&#125;/platform-tools</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：<code>ANDROID_HOME</code> 应该根据自己的 sdk 路径来填写，其余可以直接复制。至于 sdk 路径，可以打开 Android Studio，在 <code>preference</code> 中搜索 sdk 来查看。</p>
+</blockquote>
+<ul>
+<li>
+<ol start="5">
+<li>在终端中输入 <code>source .bash_profile</code> ，使我们的改动生效；</li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>输入 <code>adb</code> ，验证是否完成配置，如果不显示 <code>adb: command not found</code>，而是显示 adb 版本等内容，则说明配置完成；</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/MuMu_adb.jpeg" alt="MuMu adb"><br>
+<img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/MuMu_bash_profile.png" alt=".bash_profile 内容"></p>
+<blockquote>
+<p>提示：每次使用 adb 命令都需要使用<code>source .bash_profile</code>命令手动刷新一下配置文件解决方法：使用终端打开 zsh 命令时每次都会加载 <code>.zshrc</code> 配置文件，在这个配置文件里加入<code>source .bash_profile</code>，再次打开终端的时候，就不需要再手动刷新，可以直接使用 adb 命令了。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-连接模拟器的端口">3.连接模拟器的端口</h3>
+<ul>
+<li>
+<p>一定要先启动网易 MuMu</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/MuMu.jpeg" alt="MuMu 模拟器"></p>
+</li>
+<li>
+<p>通过命令行进入到 adb 的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Applications/NemuPlayer.app/Contents/MacOS</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>然后连接模拟器的端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./adb kill-server &amp;&amp; ./adb server &amp;&amp; ./adb shell</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/MuMu_adb_run.jpeg" alt="连接模拟器端口"></p>
+<h3 id="4-将-uniapp-项目运行到网易-MuMu-模拟器">4.将 uniapp 项目运行到网易 MuMu 模拟器</h3>
+<ul>
+<li>网易 MuMu 模拟器启动，且模拟器端口连接成功后，HBuilderX 会将其识别为名称为 <code>emulator-xxxx</code>的 Android 手机；</li>
+<li>然后在 HbuilderX 中点击 <code>运行 &gt; 运行到手机或模拟器 &gt; 对应的模拟器</code>；</li>
+</ul>
+<h3 id="5-运行到网易-MuMu-模拟器成功">5.运行到网易 MuMu 模拟器成功</h3>
+<ul>
+<li>
+<p>项目运行到网易 MuMu 模拟器的效果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/MuMu_Run_uniapp.jpeg" alt="Run Uniapp Success"></p>
+</li>
+<li>
+<p>HbuilderX 控制台输出如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/MuMu_log.jpeg" alt="HbuilderX log"></p>
+</li>
+</ul>
+<h3 id="6-参考链接">6.参考链接</h3>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/zhangzq86/article/details/86674960" >解决 Mac 上 adb: command not found 问题<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/1740745dbc4f" >Mac/Windows 下如何使用安卓模拟器开发 UniApp<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/05/07/uniapp%E5%85%B3%E4%BA%8Eios%E5%AE%89%E5%85%A8%E5%8C%BA%E7%9A%84%E9%97%AE%E9%A2%98/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">uniapp关于ios安全区的问题</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/03/05/uniapp%E4%B8%AD%E4%BD%BF%E7%94%A8wxParser%E5%AF%8C%E6%96%87%E6%9C%AC%E6%8F%92%E4%BB%B6/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">uniapp中使用wxParser富文本插件</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2018</span>&nbsp;-&nbsp;
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">瑾瑾</a>
+        </div>
+        
+        <!-- <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div> -->
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E7%89%88%E6%9C%AC"><span class="nav-text">环境版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Android-Studio"><span class="nav-text">一、Android Studio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85-Android-Studio"><span class="nav-text">1.下载并安装 Android Studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9C%A8-Android-Studio-%E4%B8%AD%E5%AE%89%E8%A3%85%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="nav-text">2.在 Android Studio 中安装模拟器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E5%AE%89%E8%A3%85%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="nav-text">2.1 安装模拟器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E5%AE%89%E8%A3%85%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-text">2.2 安装官方推荐的软件包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-SDK-Tools-%E6%A0%87%E7%AD%BE%E9%A1%B5%E4%B8%8B%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-text">2.2.1 SDK Tools 标签页下的工具</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-SDK-Platforms-%E6%A0%87%E7%AD%BE%E9%A1%B5%E4%B8%8B%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-text">2.2.2 SDK Platforms 标签页下的工具</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%9C%A8-Android-Studio-%E4%B8%AD%E5%88%9B%E5%BB%BA-Android-%E8%99%9A%E6%8B%9F%E8%AE%BE%E5%A4%87"><span class="nav-text">3.在 Android Studio 中创建 Android 虚拟设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%AE%A1%E7%90%86-%E8%BF%90%E8%A1%8C%E8%99%9A%E6%8B%9F%E8%AE%BE%E5%A4%87"><span class="nav-text">4.管理&amp;运行虚拟设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%B0%86-uniapp-%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E5%88%B0-Android-%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="nav-text">5.将 uniapp 项目运行到 Android 模拟器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%BF%90%E8%A1%8C%E5%88%B0-Android-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%88%90%E5%8A%9F"><span class="nav-text">6.运行到 Android 模拟器成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-text">7.参考链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BD%91%E6%98%93-MuMu"><span class="nav-text">二、网易 MuMu</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85%E7%BD%91%E6%98%93-MuMu"><span class="nav-text">1.下载并安装网易 MuMu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE-adb"><span class="nav-text">2.配置 adb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BF%9E%E6%8E%A5%E6%A8%A1%E6%8B%9F%E5%99%A8%E7%9A%84%E7%AB%AF%E5%8F%A3"><span class="nav-text">3.连接模拟器的端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B0%86-uniapp-%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E5%88%B0%E7%BD%91%E6%98%93-MuMu-%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="nav-text">4.将 uniapp 项目运行到网易 MuMu 模拟器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BF%90%E8%A1%8C%E5%88%B0%E7%BD%91%E6%98%93-MuMu-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%88%90%E5%8A%9F"><span class="nav-text">5.运行到网易 MuMu 模拟器成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-text">6.参考链接</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

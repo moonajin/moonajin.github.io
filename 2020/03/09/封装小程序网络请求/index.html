@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="瑾瑾">
+    
+    <title>
+        
+            封装小程序网络请求 |
+        
+        瑾瑾的技术分享博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"moonajin.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+                瑾瑾的技术分享博客
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">封装小程序网络请求</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">瑾瑾</span>
+                        
+                            <span class="author-label">前端开发工程师</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+  <span class="article-date article-meta-item">
+    <i class="fas fa-edit"></i>&nbsp;2020-03-09
+  </span>
+  
+  <span class="article-categories article-meta-item">
+    <i class="fas fa-folder"></i>&nbsp;
+    <ul>
+      
+      <li>
+        <a href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"
+          >小程序</a
+        >&nbsp;
+      </li>
+      
+    </ul>
+  </span>
+       
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="提前准备">提前准备</h2>
+<h3 id="服务器域名配置">服务器域名配置</h3>
+<ul>
+<li>每个微信小程序需要<strong>事先设置通讯域名</strong>，小程序<strong>只可以跟指定的域名进行网络通信</strong>。包括普通 HTTPS 请求（<a class="link"   target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html" >wx.request<i class="fas fa-external-link-alt"></i></a>）、上传文件（<a class="link"   target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html" >wx.uploadFile<i class="fas fa-external-link-alt"></i></a>）、下载文件（<a class="link"   target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/network/download/wx.downloadFile.html" >wx.downloadFile<i class="fas fa-external-link-alt"></i></a>) 和 WebSocket 通信（<a class="link"   target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/network/websocket/wx.connectSocket.html" >wx.connectSocket<i class="fas fa-external-link-alt"></i></a>）</li>
+<li>可以在「小程序后台-开发-开发管理-开发设置-服务器域名」中进行配置
+<ul>
+<li>域名只支持 https 和 wss 协议</li>
+<li>域名不能使用 IP 地址（小程序的局域网 IP 除外）或 localhost</li>
+<li>可以配置端口，如 <code>https://myserver.com:8080</code>，但是配置后只能向 <code>https://myserver.com:8080</code> 发起请求。如果向 <code>https://myserver.com</code>、<code>https://myserver.com:9091</code> 等 URL 请求则会失败</li>
+<li>如果不配置端口。如 <code>https://myserver.com</code>，那么请求的 URL 中也不能包含端口，甚至是默认的 443 端口也不可以。如果向 <code>https://myserver.com:443</code> 请求则会失败</li>
+<li>域名必须经过 ICP 备案</li>
+<li>不支持配置父域名，使用子域名<br>
+<img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/domainName_config.jpeg" alt="配置服务器域名"></li>
+</ul>
+</li>
+</ul>
+<h3 id="目录结构">目录结构</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt=""></p>
+<h2 id="配置-config-文件">配置 config 文件</h2>
+<ul>
+<li>
+<p>大多数情况下，我们在实际开发中 API 都是部署在专用域名之下的，比如正式域名 <code>https://api.example.com</code>，测试域名 <code>https://testapi.example.com</code> 等，而后台给我们返回的接口地址通常是不带有域名的 <code>/v1/example/list</code> 这种格式，需要我们自己根据业务需要拼接出完整的请求路径。</p>
+</li>
+<li>
+<p>为了方便管理和后续维护，可以在 utils 文件夹下新建一个 config.js 文件，作为该项目的配置文件，用来存储所有项目相关的配置，比如 base url 以及 HTTP Header 等</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils/config.js</span></span><br><span class="line"><span class="comment">// 项目配置项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="comment">// 请求域名地址</span></span><br><span class="line">  <span class="attr">baseUrl</span>: &#123;</span><br><span class="line">    <span class="attr">develop</span>: <span class="string">&quot;http://devapi.example.com&quot;</span>,</span><br><span class="line">    <span class="attr">test</span>: <span class="string">&quot;http://testapi.example.com&quot;</span>,</span><br><span class="line">    <span class="attr">release</span>: <span class="string">&quot;https://api.example.com&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// header</span></span><br><span class="line">  <span class="attr">header</span>: &#123;</span><br><span class="line">    <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded; charset=UTF-8&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  config,</span><br><span class="line">  <span class="attr">baseUrl</span>: config.baseUrl[<span class="string">&quot;develop&quot;</span>]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="封装请求">封装请求</h2>
+<ul>
+<li>在小程序中，我们通过 <code>wx.request</code> 方法来进行 HTTPS 请求，所以我们要对 <code>wx.request</code> 进行封装，<code>wx.request</code>的参数 url 是必填的，其余都是可选项</li>
+<li>我们可以把每个接口都需要的参数，进行封装，这样就不用每个接口都传一次了，也方便后续的维护，如果在某个接口中某一个通用参数的值是特殊的，那么可以直接在该接口中传新的参数值把旧的覆盖掉。</li>
+<li>默认情况下，我们会对 success 以及 fail 进行处理，如果想要手动处理异常，设置 <code>isDealFail</code> 的值为 true 就可以实现你想要的操作了</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils/network.js</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 网络请求对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> &#123; baseUrl,config &#125; = <span class="built_in">require</span>(<span class="string">`./config.js`</span>);</span><br><span class="line"><span class="keyword">const</span> net = &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 设置通用参数</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="attr">commonParams</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> params = &#123;</span><br><span class="line">      <span class="attr">deviceType</span>: <span class="string">&quot;weapp&quot;</span>, <span class="comment">// 接口调用来源参数</span></span><br><span class="line">      <span class="attr">version</span>: <span class="string">&quot;1.0.0&quot;</span>, <span class="comment">// 版本号</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 系统信息</span></span><br><span class="line">    <span class="keyword">const</span> systemInfo = wx.getStorageSync(<span class="string">&quot;systemInfo&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (systemInfo) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; brand, model, system, version, SDKVersion, &#125; = systemInfo;</span><br><span class="line">      <span class="keyword">if</span> (brand) &#123;</span><br><span class="line">        <span class="comment">// 设备品牌</span></span><br><span class="line">        params.brand = brand;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(model) &#123;</span><br><span class="line">        <span class="comment">// 设备型号</span></span><br><span class="line">        params.model = model;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (system) &#123;</span><br><span class="line">        <span class="comment">// 操作系统及版本</span></span><br><span class="line">        params.system = system;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (version) &#123;</span><br><span class="line">        <span class="comment">// 微信版本号</span></span><br><span class="line">        params.wxVersion = version;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (SDKVersion) &#123;</span><br><span class="line">        <span class="comment">// 客户端基础库版本</span></span><br><span class="line">        params.SDKVersion = SDKVersion;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> userInfo = wx.getStorageSync(<span class="string">&quot;userInfo&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (userInfo &amp;&amp; userInfo.token) &#123;</span><br><span class="line">      params.token = userInfo.token; <span class="comment">// 用户登录凭证token</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> params;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 设置网络请求</span></span><br><span class="line"><span class="comment">   * wx.request</span></span><br><span class="line"><span class="comment">   * options 参数对象，url，method，data等</span></span><br><span class="line"><span class="comment">   * isDealFail 是否手动处理异常，true or false</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="title">request</span>(<span class="params">options, isDealFail = <span class="literal">false</span></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> params = &#123; ...options &#125;;</span><br><span class="line">    <span class="keyword">if</span> (!params.url) &#123;</span><br><span class="line">      wx.showToast(&#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;请设置请求url&quot;</span>,</span><br><span class="line">        <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span>,</span><br><span class="line">        <span class="attr">duration</span>: <span class="number">2000</span></span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 过滤空值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> params.data) &#123;</span><br><span class="line">      <span class="keyword">const</span> value = params.data[key];</span><br><span class="line">      <span class="keyword">if</span> (value === <span class="literal">undefined</span> || value === <span class="literal">null</span> || value === <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> params.data[key];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      params.data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams(), params.data);</span><br><span class="line">      wx.request(&#123;</span><br><span class="line">        <span class="attr">url</span>: baseUrl + params.url, <span class="comment">// 请求url</span></span><br><span class="line">        <span class="attr">data</span>: params.data || <span class="literal">null</span>, <span class="comment">// 请求的参数</span></span><br><span class="line">        <span class="attr">method</span>: params.method || <span class="string">&quot;GET&quot;</span>, <span class="comment">// HTTP 请求方法</span></span><br><span class="line">        <span class="attr">dataType</span>: params.dataType || <span class="string">&quot;json&quot;</span>, <span class="comment">// 返回的数据格式</span></span><br><span class="line">        <span class="attr">header</span>: <span class="built_in">Object</span>.assign(&#123;&#125;, config.header, params.header), <span class="comment">// 请求的 header</span></span><br><span class="line">        <span class="attr">timeout</span>: params.timeout || <span class="number">30000</span>, <span class="comment">// 超时时间，单位为毫秒</span></span><br><span class="line">        <span class="attr">responseType</span>: params.responseType || <span class="string">&quot;text&quot;</span>, <span class="comment">// 响应的数据类型</span></span><br><span class="line">        <span class="attr">enableCache</span>: params.enableCache || <span class="literal">false</span> <span class="comment">// 是否开启 cache</span></span><br><span class="line">        <span class="attr">success</span>: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> &#123; code, msg, data &#125; = res;</span><br><span class="line">          <span class="keyword">if</span> (<span class="number">00001</span> === code) &#123;</span><br><span class="line">            <span class="comment">// 请求成功</span></span><br><span class="line">            resolve(data);</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">00004</span> === code) &#123;</span><br><span class="line">            <span class="comment">// 未登录</span></span><br><span class="line">            wx.removeStorageSync(<span class="string">&quot;userInfo&quot;</span>);</span><br><span class="line">            wx.showToast(&#123;</span><br><span class="line">              <span class="attr">title</span>: <span class="string">&quot;您的用户信息已失效，请重新登录&quot;</span>,</span><br><span class="line">              <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span>,</span><br><span class="line">              <span class="attr">duration</span>: <span class="number">2000</span>,</span><br><span class="line">              <span class="attr">success</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                wx.navigateTo(&#123;</span><br><span class="line">                  <span class="attr">url</span>: <span class="string">&quot;/pages/login/login&quot;</span></span><br><span class="line">                &#125;);</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 其他异常</span></span><br><span class="line">            <span class="keyword">if</span> (isDealFail) &#123;</span><br><span class="line">              <span class="comment">// 是否手动处理异常</span></span><br><span class="line">              reject(res);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              wx.showToast(&#123;</span><br><span class="line">                <span class="attr">title</span>: msg || <span class="string">&quot;请求失败&quot;</span>,</span><br><span class="line">                <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span>,</span><br><span class="line">                <span class="attr">duration</span>: <span class="number">2000</span></span><br><span class="line">              &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">fail</span>: <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 请求失败</span></span><br><span class="line">          <span class="keyword">if</span> (isDealFail) &#123;</span><br><span class="line">            <span class="comment">// 如果手动处理异常</span></span><br><span class="line">            reject(err);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            wx.showToast(&#123;</span><br><span class="line">              <span class="attr">title</span>: err || <span class="string">&quot;请求失败&quot;</span>,</span><br><span class="line">              <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span>,</span><br><span class="line">              <span class="attr">duration</span>: <span class="number">2000</span></span><br><span class="line">            &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> promise;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">module</span>.exports = net;</span><br></pre></td></tr></table></figure>
+<h2 id="如何使用">如何使用</h2>
+<ul>
+<li>在 utils 文件夹下新建 api.js 文件，这里存放后台给我们的接口地址</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils/api.js</span></span><br><span class="line"><span class="keyword">const</span> apis = &#123;</span><br><span class="line">  <span class="attr">api_city_list</span>: <span class="string">&quot;/v1/example/city/list&quot;</span>,</span><br><span class="line">  <span class="attr">api_city_detail</span>: <span class="string">&quot;/v1/example/city/detail&quot;</span>,</span><br><span class="line">  <span class="attr">api_school_list</span>: <span class="string">&quot;/v1/example/school/list&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = apis;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后在需要的 js 文件中进行引用</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// login.js</span></span><br><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">  api_city_list,</span><br><span class="line">  api_city_detail</span><br><span class="line">&#125; = <span class="built_in">require</span>(<span class="string">&#x27;../../utils/api.js&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 默认情况</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="title">getCityList</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> params = &#123;&#125;;</span><br><span class="line">  params.url = api_city_list;</span><br><span class="line">  net.req(params).then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 请求成功</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 手动处理错误</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="title">getCityDetail</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> params = &#123;&#125;;</span><br><span class="line">  params.url = api_city_detail;</span><br><span class="line">  params.data = &#123;</span><br><span class="line">    <span class="attr">id</span>: cityId</span><br><span class="line">  &#125;;</span><br><span class="line">  net.req(params, <span class="literal">true</span>).then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 请求成功</span></span><br><span class="line">  &#125;, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 请求失败</span></span><br><span class="line">  &#125;).catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 请求失败</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 多个请求</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="title">loadCityList</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> params = &#123;&#125;;</span><br><span class="line">  params.url = api_city_list;</span><br><span class="line">  <span class="keyword">return</span> net.req(params, <span class="literal">true</span>);</span><br><span class="line">&#125;,</span><br><span class="line"><span class="function"><span class="title">loadSchoolList</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> params = &#123;&#125;;</span><br><span class="line">  params.url = api_school_list;</span><br><span class="line">  <span class="keyword">return</span> net.req(params, <span class="literal">true</span>);</span><br><span class="line">&#125;,</span><br><span class="line"><span class="function"><span class="title">loadPageData</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> loadCityList = <span class="built_in">this</span>.loadCityList();</span><br><span class="line">  <span class="keyword">const</span> loadSchoolList = <span class="built_in">this</span>.loadSchoolList();</span><br><span class="line">  <span class="built_in">Promise</span>.all([loadSchoolList, loadFilterOptions, loadShareInfo])</span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> [cityListRes, schoolListRes] = res;</span><br><span class="line">    <span class="comment">// 请求成功</span></span><br><span class="line">    <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">      <span class="attr">isLoading</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">cityList</span>: cityListRes.cityList,</span><br><span class="line">      <span class="attr">schoolList</span>: schoolListRes.schoolList</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 请求失败</span></span><br><span class="line">  &#125;).catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 请求失败</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="其他">其他</h2>
+<h3 id="关于网络请求">关于网络请求</h3>
+<ul>
+<li>
+<p>网络请求的默认超时时间和最大超时时间都是 60s</p>
+<ul>
+<li>
+<p>超时时间可以在 app.json 中通过 networktimeout 进行配置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;networkTimeout&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;request&quot;</span>: <span class="number">30000</span>,</span><br><span class="line">    <span class="attr">&quot;connectSocket&quot;</span>: <span class="number">60000</span>,</span><br><span class="line">    <span class="attr">&quot;uploadFile&quot;</span>: <span class="number">60000</span>,</span><br><span class="line">    <span class="attr">&quot;downloadFile&quot;</span>: <span class="number">60000</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>wx.request、wx.uploadFile、wx.downloadFile 的最大并发限制是 10 个</p>
+</li>
+<li>
+<p>wx.connectSocket 的最大并发限制是 5 个</p>
+</li>
+<li>
+<p>小程序进入后台运行后，如果 5s 内网络请求没有结束，会回调错误信息 fail interrupted；在回到前台之前，网络请求接口调用都会无法调用</p>
+</li>
+<li>
+<p>只要成功接收到服务器返回，无论 statusCode 是多少，都会进入 success 回调</p>
+</li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/04/18/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">小程序实现微信授权登录</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/11/23/VUE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">VUE动态加载本地图片</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2018</span>&nbsp;-&nbsp;
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">瑾瑾</a>
+        </div>
+        
+        <!-- <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div> -->
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%89%8D%E5%87%86%E5%A4%87"><span class="nav-text">提前准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE"><span class="nav-text">服务器域名配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-text">目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-config-%E6%96%87%E4%BB%B6"><span class="nav-text">配置 config 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E8%AF%B7%E6%B1%82"><span class="nav-text">封装请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="nav-text">如何使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="nav-text">关于网络请求</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

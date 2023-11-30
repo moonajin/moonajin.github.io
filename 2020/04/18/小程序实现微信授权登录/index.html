@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="瑾瑾">
+    
+    <title>
+        
+            小程序实现微信授权登录 |
+        
+        瑾瑾的技术分享博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"moonajin.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/logo.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+                瑾瑾的技术分享博客
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">小程序实现微信授权登录</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">瑾瑾</span>
+                        
+                            <span class="author-label">前端开发工程师</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+  <span class="article-date article-meta-item">
+    <i class="fas fa-edit"></i>&nbsp;2020-04-18
+  </span>
+  
+  <span class="article-categories article-meta-item">
+    <i class="fas fa-folder"></i>&nbsp;
+    <ul>
+      
+      <li>
+        <a href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"
+          >小程序</a
+        >&nbsp;
+      </li>
+      
+    </ul>
+  </span>
+       
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="简述">简述</h2>
+<p>微信授权登录一般需要前端先<strong>获取用户的手机号</strong>和<strong>临时登录凭证 code</strong>，然后把获取到的值传给后台，后台通过登录凭证校验接口<code>auth.code2Session</code>，获取<strong>用户唯一标识 OpenID</strong>、<strong>用户在微信开放平台帐号下的唯一标识 UnionID</strong>和<strong>会话密钥 session_key</strong>，会话密钥 <code>session_key</code> 是对用户数据进行加密签名的密钥，为了应用自身的数据安全，后台可以根据这些信息来生成一个自定义登录态，比如 <code>token</code>，并把 <code>token</code> 和用户信息返回给前端，前端在接收到返回值后，可以把 <code>token</code> 和用户信息通过 <code>wx.setStorage</code> 保存到本地，用于后续业务逻辑中前后端交互时识别用户身份。</p>
+<h2 id="图解">图解</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/moonajin/blog-pics/wxlogin.jpg" alt="小程序登录流程图"></p>
+<h2 id="详细流程">详细流程</h2>
+<ul>
+<li>
+<p>在 wxml 中定义 <code>button</code> 按钮，并将 <code>button</code> 的 <code>open-type</code> 值设置为 <code>getPhoneNumber</code></p>
+<ul>
+<li>
+<p>获取手机号接口需要用户主动触发才能发起，所以该功能不由 API 来调用，需用户点击 <code>button</code> 组件来触发</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- login.wxml --&gt;</span><br><span class="line">&lt;button open-type=&quot;getPhoneNumber&quot; bindgetphonenumber=&quot;getPhoneNumber&quot;&gt;微信授权登录&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>当用户点击按钮并同意授权之后，可以通过 <code>bindgetphonenumber</code> 事件回调中获取到微信服务器返回的加密数据，然后后台可以结合 <code>session_key</code> 和 <code>app_id</code> 进行解密获取手机号</p>
+<ul>
+<li>
+<p>想要获取微信用户绑定的手机号，必须先调用 <code>wx.login</code> 接口，获取<strong>临时登录凭证 code</strong>，<code>临时登录凭证 code</code> 只能使用一次，有效期五分钟</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// login.js</span></span><br><span class="line"><span class="attr">onLoad</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  wx.login(&#123;</span><br><span class="line">    <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">        <span class="attr">wxCode</span>: res.code</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>在回调中调用 <code>wx.login</code> 登录，可能会刷新登录态。此时服务器使用 <code>code</code> 换取的 <code>sessionKey</code> 不是加密时使用的 <code>sessionKey</code>，会导致解密失败。可以在回调中先使用 <code>checkSession</code> 进行登录态检查，避免 <code>login</code> 刷新登录态</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// login.js</span></span><br><span class="line"><span class="comment">// 点击按钮获取微信手机号事件回调</span></span><br><span class="line"><span class="function"><span class="title">getPhoneNumber</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">  <span class="comment">// encryptedData：包括敏感数据在内的完整用户信息的加密数据</span></span><br><span class="line">  <span class="comment">// iv：加密算法的初始向量</span></span><br><span class="line">  <span class="keyword">const</span> &#123; encryptedData, iv &#125; = e.detail;</span><br><span class="line">  <span class="keyword">if</span> (!encryptedData || !iv) &#123; <span class="comment">// 如果参数不存在就退出函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 检测登录状态是否过期</span></span><br><span class="line"><span class="comment">  * 通过 wx.login 接口获得的用户登录态拥有一定的时效性。</span></span><br><span class="line"><span class="comment">  * 用户越久未使用小程序，用户登录态越有可能失效。</span></span><br><span class="line"><span class="comment">  * 反之如果用户一直在使用小程序，则用户登录态一直保持有效。</span></span><br><span class="line"><span class="comment">  * 具体时效逻辑由微信维护，对开发者透明。</span></span><br><span class="line"><span class="comment">  * 开发者只需要调用 wx.checkSession 接口检测当前用户登录态是否有效</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  wx.checkSession(&#123;</span><br><span class="line">    <span class="attr">success</span>: <span class="function">() =&gt;</span> &#123; <span class="comment">// session_key 未过期，并且在本生命周期一直有效，那么可以直接请求登录方法，把值传给后台</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.data.wxCode) &#123;  <span class="comment">// 判断 临时登录凭证 code 是否存在</span></span><br><span class="line">        <span class="built_in">this</span>.wxLogin(<span class="built_in">this</span>.data.wxCode, encryptedData, iv);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123; <span class="comment">// 若不存在，需要重新执行登录流程</span></span><br><span class="line">        goNext();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">fail</span>: <span class="function">() =&gt;</span> &#123; <span class="comment">// session_key 已经失效，需要重新执行登录流程</span></span><br><span class="line">      goNext();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">const</span> goNext = <span class="function">() =&gt;</span> &#123; <span class="comment">// wx.login</span></span><br><span class="line">    wx.login(&#123;</span><br><span class="line">      <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;</span><br><span class="line">          code</span><br><span class="line">        &#125; = res;</span><br><span class="line">        <span class="keyword">if</span> (!code) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">this</span>.wxLogin(code, encryptedData, iv)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>使用 <code>wx.request</code> 请求后台接口，把<strong>临时登录凭证</strong>、<strong>加密手机号</strong>等信息作为参数发送给后台，后台将解密处理后的用户信息返回给前端，若接口请求成功并成功拿到 token 和用户信息，那么前端则把这些信息存储在本地缓存中；若接口请求失败，那么前端则提示用户登录失败，请重新登录</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// login.js</span></span><br><span class="line"><span class="comment">// 登录</span></span><br><span class="line"><span class="function"><span class="title">wxLogin</span>(<span class="params">code, encryptedData, iv</span>)</span> &#123;</span><br><span class="line">  wx.showLoading(&#123; <span class="comment">// 显示登录 loading</span></span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;努力登录中...&#x27;</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 发起网络请求</span></span><br><span class="line">  wx.request(&#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>, <span class="comment">// 请求方法</span></span><br><span class="line">    <span class="attr">url</span>: <span class="string">&quot;https://example.com/wxLogin&quot;</span>, <span class="comment">// 请求url</span></span><br><span class="line">    <span class="attr">data</span>: &#123; <span class="comment">// 请求参数</span></span><br><span class="line">      code, <span class="comment">// 临时登录凭证 code</span></span><br><span class="line">      encryptedData, <span class="comment">// 用户信息加密数据</span></span><br><span class="line">      iv <span class="comment">// 加密算法的初始向量</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123; <span class="comment">// 接口调用成功的回调函数</span></span><br><span class="line">      wx.hideLoading(); <span class="comment">// 隐藏 loading 提示框</span></span><br><span class="line">      <span class="keyword">if</span> (res &amp;&amp; res.data &amp;&amp; res.data.userInfo &amp;&amp; res.data.userInfo.token) &#123;</span><br><span class="line">        <span class="comment">// 将 用户信息 和 token 存储在本地缓存中</span></span><br><span class="line">        wx.setStorageSync(<span class="string">&#x27;userInfo&#x27;</span>, res.data.userInfo);</span><br><span class="line">        <span class="comment">// 判断是否存在上级页面，如果有，登录成功后则返回上一级页面并刷新，如果返回层级大于现有页面数，则返回到首页</span></span><br><span class="line">        <span class="keyword">let</span> pages = getCurrentPages(); <span class="comment">// 在内存中的所有页面栈对象</span></span><br><span class="line">        <span class="keyword">let</span> prePage = pages[pages.length - <span class="number">2</span>]; <span class="comment">// 我的页面对象</span></span><br><span class="line">        <span class="keyword">if</span> (prePage) &#123;</span><br><span class="line">          wx.navigateBack(&#123; <span class="comment">// 关闭当前页面，返回上一页面</span></span><br><span class="line">            <span class="attr">success</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">              <span class="comment">// 执行前一页面的onLoad方法，刷新页面</span></span><br><span class="line">              prePage.onLoad();</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          wx.navigateBack(); <span class="comment">// 关闭当前页面，返回上一页面</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 如果没有token和用户信息，则登录失败</span></span><br><span class="line">      wx.showModal(&#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;提示&quot;</span>, <span class="comment">// 提示的标题</span></span><br><span class="line">        <span class="attr">content</span>: <span class="string">&quot;登录失败，请重新登录&quot;</span>, <span class="comment">// 提示的内容</span></span><br><span class="line">        <span class="attr">showCancel</span>: <span class="literal">false</span> <span class="comment">// 是否显示取消按钮</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">fail</span>: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123; <span class="comment">// 接口调用失败的回调函数</span></span><br><span class="line">      wx.hideLoading(); <span class="comment">// 隐藏 loading 提示框</span></span><br><span class="line">      wx.showModal(&#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;提示&quot;</span>, <span class="comment">// 提示的标题</span></span><br><span class="line">        <span class="attr">content</span>: (e &amp;&amp; e.msg) || <span class="string">&quot;登录失败，请重新登录&quot;</span>, <span class="comment">// 提示的内容</span></span><br><span class="line">        <span class="attr">showCancel</span>: <span class="literal">false</span> <span class="comment">// 是否显示取消按钮</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>在需要使用用户信息或 <code>token</code> 的地方，我们可以通过 <code>wx.getStorage</code> 从本地缓存中取出缓存的用户信息和<code>token</code>，进行使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> userInfo = wx.getStorageSync(<span class="string">&quot;userInfo&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> token = userInfo.token; <span class="comment">// 用户登录凭证token</span></span><br><span class="line"><span class="keyword">const</span> phoneNumber = userInfo.phoneNumber; <span class="comment">// 用户手机号</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/05/16/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">小程序实现微信支付</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/03/09/%E5%B0%81%E8%A3%85%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">封装小程序网络请求</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2018</span>&nbsp;-&nbsp;
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">瑾瑾</a>
+        </div>
+        
+        <!-- <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div> -->
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0"><span class="nav-text">简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E8%A7%A3"><span class="nav-text">图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B"><span class="nav-text">详细流程</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

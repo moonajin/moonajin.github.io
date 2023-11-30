@@ -38,59 +38,13 @@
 <main class="page-container">
 
     
-        <div class="first-screen-container flex-center fade-in-down-animation">
-    <div class="content flex-center">
-        <div class="description">
-            Keep writing and Keep loving.
-        </div>
-        
-            <div class="s-icon-list">
-                
-                    
-                        
-                            <span class="s-icon-item github">
-                                <a target="_blank" href="https://github.com/moonajin">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </span>
-                        
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                        
-                            <span class="s-icon-item email">
-                                <a href="mailto:zhangjin5520@gmail.com">
-                                    <i class="fas fa-envelope"></i>
-                                </a>
-                            </span>
-                        
-                    
-                
-            </div>
-        
-    </div>
-</div>
-
-    
 
     <div class="page-main-content">
 
         <div class="page-main-content-top">
             <header class="header-wrapper">
 
-    <div class="header-content has-first-screen">
+    <div class="header-content">
         <div class="left">
             
                 <a class="logo-image" href="/">
@@ -196,91 +150,31 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2023/07/10/uniapp%E7%A7%BB%E5%8A%A8%E7%AB%AFapp%E5%88%86%E4%BA%AB%E5%88%B0%E5%BE%AE%E4%BF%A1/">
-                        uniapp移动端app分享到微信
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        一、相关配置
-1.配置应用支持通用链接(Universal Link)
-
-由于苹果 iOS 13 系统版本安全升级，微信 SDK1.8.6 版本要求支持 Universal Links 方式跳转，以便进行合法性校验，提升安全性。如果不配置通用链接，使...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Jul 10 2023 00:00:00 GMT+0800">2023-07-10</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/07/10/uniapp%E7%A7%BB%E5%8A%A8%E7%AB%AFapp%E5%88%86%E4%BA%AB%E5%88%B0%E5%BE%AE%E4%BF%A1/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/07/07/iOS%20%E9%85%8D%E7%BD%AE%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5(Universal%20Link)/">
-                        iOS 配置通用链接(Universal Link)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        一、什么是 Universal Link？
-1.背景介绍
-
-
-Universal Link 是苹果在 WWDC 2015 上提出的 iOS 9 的新特性之一。此特性类似于深层链接，并能够方便地通过打开一个 Https 链接来直接启动您的客户端应用(手...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Jul 07 2023 00:00:00 GMT+0800">2023-07-07</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/07/07/iOS%20%E9%85%8D%E7%BD%AE%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5(Universal%20Link)/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/05/07/uniapp%E5%85%B3%E4%BA%8Eios%E5%AE%89%E5%85%A8%E5%8C%BA%E7%9A%84%E9%97%AE%E9%A2%98/">
-                        uniapp关于ios安全区的问题
+                    <a href="/2021/08/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E4%BA%AB%E5%8F%8A%E5%B0%81%E8%A3%85/">
+                        微信小程序自定义分享及封装
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
                         
-在 mainfest.json 里进行如下配置就不显示底部安全区的遮挡了
+因为业务扩展，项目中需要分享的页面越来越多，但各个页面分享的逻辑大同小异，如果每个页面都写一份分享逻辑不利于后续的维护，所以特意将这部分内容进行了封装。
 
-12345678910&#123;  &quot;app-plus&quot; : &#123;      /* 5+App特有相关 */      &quot;safea...
+onShareAppMessage
+概念
+
+监听用户点击页面内转发按钮（button 组件 ...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat May 07 2022 00:00:00 GMT+0800">2022-05-07</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Aug 17 2021 00:00:00 GMT+0800">2021-08-17</span></span>
         
         
     </div>
 
-    <a href="/2022/05/07/uniapp%E5%85%B3%E4%BA%8Eios%E5%AE%89%E5%85%A8%E5%8C%BA%E7%9A%84%E9%97%AE%E9%A2%98/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/08/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E4%BA%AB%E5%8F%8A%E5%B0%81%E8%A3%85/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -290,26 +184,30 @@ Universal Link 是苹果在 WWDC 2015 上提出的 iOS 9 的新特性之一。�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/04/11/uniapp%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E5%88%B0Android%E6%A8%A1%E6%8B%9F%E5%99%A8/">
-                        uniapp项目运行到Android模拟器
+                    <a href="/2021/07/24/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8axios.all%E5%A4%84%E7%90%86%E5%B9%B6%E5%8F%91%E8%AF%B7%E6%B1%82/">
+                        vue项目中使用axios.all处理并发请求
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
                         
-用 uniapp 进行 app 开发时，需要安装模拟器进行模拟，ios 模拟器的安装运行比较简单，按照官方文档的介绍很容易就能运行成功，可是官方文档对于 Android 模拟器的介绍只是一带而过，很多东西都不了解，因此走了很多弯路，所以记录下来以便...
+在实际开发中，我们经常需要同时调用多个后台接口，并在多个请求都完成后执行一些逻辑，我们可以通过axios.all()、axios.spread() 这两个辅助函数来进行处理。
+
+注意事项
+
+需要注意的是：axios 实例没有 all 方法，all ...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 11 2022 00:00:00 GMT+0800">2022-04-11</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Jul 24 2021 00:00:00 GMT+0800">2021-07-24</span></span>
         
         
     </div>
 
-    <a href="/2022/04/11/uniapp%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E5%88%B0Android%E6%A8%A1%E6%8B%9F%E5%99%A8/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/07/24/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8axios.all%E5%A4%84%E7%90%86%E5%B9%B6%E5%8F%91%E8%AF%B7%E6%B1%82/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -319,67 +217,31 @@ Universal Link 是苹果在 WWDC 2015 上提出的 iOS 9 的新特性之一。�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/03/05/uniapp%E4%B8%AD%E4%BD%BF%E7%94%A8wxParser%E5%AF%8C%E6%96%87%E6%9C%AC%E6%8F%92%E4%BB%B6/">
-                        uniapp中使用wxParser富文本插件
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        引入插件
-
-
-在 HBuilderX 编辑器中打开 manifest.json 文件，切换到源码视图；
-
-
-在源码视图中，找到小程序的相关配置，输入如下代码：
-12345678&quot;mp-weixin&quot;: &#123;  &quot;...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Mar 05 2022 00:00:00 GMT+0800">2022-03-05</span></span>
-        
-        
-    </div>
-
-    <a href="/2022/03/05/uniapp%E4%B8%AD%E4%BD%BF%E7%94%A8wxParser%E5%AF%8C%E6%96%87%E6%9C%AC%E6%8F%92%E4%BB%B6/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/02/26/uniapp%E9%85%8D%E7%BD%AE.gitignore%E6%96%87%E4%BB%B6/">
-                        uniapp配置.gitignore文件
+                    <a href="/2021/07/11/VUE%E7%9B%B4%E6%8E%A5%E5%BC%95%E7%94%A8%E5%85%A8%E5%B1%80%E6%A0%B7%E5%BC%8F/">
+                        VUE直接引用全局样式
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
                         
-
-首先在项目所在目录下使用命令行或直接新建 .gitignore 文件
-1touch .gitignore
+在项目开发中，我们通常会需要一些全局样式，比如颜色、变量等等，但如果每次都用 @import 导入会很麻烦，这时我们可以用 vue 插件 style-resources-loader 进行样式自动化导入处理。
 
 
-然后打开.gitignore 文件，复制粘贴以下代码：
-12345678node_modules/dist/**.projectunpa...
+下面以颜色为例：
+
+安装 styl...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Feb 26 2022 00:00:00 GMT+0800">2022-02-26</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Jul 11 2021 00:00:00 GMT+0800">2021-07-11</span></span>
         
         
     </div>
 
-    <a href="/2022/02/26/uniapp%E9%85%8D%E7%BD%AE.gitignore%E6%96%87%E4%BB%B6/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/07/11/VUE%E7%9B%B4%E6%8E%A5%E5%BC%95%E7%94%A8%E5%85%A8%E5%B1%80%E6%A0%B7%E5%BC%8F/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -389,38 +251,99 @@ Universal Link 是苹果在 WWDC 2015 上提出的 iOS 9 的新特性之一。�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/02/19/uniapp%E4%BD%BF%E7%94%A8Iconfont%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87/">
-                        uniapp使用Iconfont字体图标
+                    <a href="/2021/06/16/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95/">
+                        小程序页面间传递数据的方法
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        页面之间的通信
+使用 url 参数传递
+
+页面跳转 wx.navigateTo 或页面重定向 wx.redirectTo 时，可以使用 url 带参数传递数据，并在新页面 onLoad 初始化的时候接收参数；
+参数与路径之间使用 ? 分隔，参数键与参...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jun 16 2021 00:00:00 GMT+0800">2021-06-16</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/06/16/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/06/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B7%AF%E7%94%B1%E2%80%94wx.navigateTo/">
+                        小程序路由—wx.navigateTo
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        概念
+
+保留当前页面，跳转到应用内的某个页面。
+但是不能跳到 tabbar 页面。
+使用 wx.navigateBack 可以返回到原页面。
+小程序中页面栈最多十层。
+
+参数
+
+
+url：需要跳转的应用内非tabBar的页面的路径
+
+
+路径后可以带参...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 15 2021 00:00:00 GMT+0800">2021-06-15</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/06/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B7%AF%E7%94%B1%E2%80%94wx.navigateTo/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/06/09/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%BA%E5%88%B6%E6%9B%B4%E6%96%B0%E5%85%A8%E8%A7%A3%E6%9E%90/">
+                        小程序强制更新全解析
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
                         
-首先注册登录iconfont 图标库，登录成功后，选择要用的图标并加入项目，步骤如下：
-
-
-
-1.在搜索框中输入要用图标的关键词进行搜索，找到合适的图标之后，将图标添加入库（即购物车）；
-
-
-
-2.选择完成后，点击右上角购物车图标；
-
-
-
-3.把购...
+在小程序开发中，我们会不可避免的涉及到小程序新版本迭代的问题，因为小程序的更新机制是异步的，新版本发布后并不会立刻应用到所有的现有用户，部分用户用的可能还是原来的旧版本，但如果是急需修复的 bug 或其他急需上线的需求，我们就需要了解小程序的运行和...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Feb 19 2022 00:00:00 GMT+0800">2022-02-19</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jun 09 2021 00:00:00 GMT+0800">2021-06-09</span></span>
         
         
     </div>
 
-    <a href="/2022/02/19/uniapp%E4%BD%BF%E7%94%A8Iconfont%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/06/09/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%BA%E5%88%B6%E6%9B%B4%E6%96%B0%E5%85%A8%E8%A7%A3%E6%9E%90/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -430,31 +353,48 @@ Universal Link 是苹果在 WWDC 2015 上提出的 iOS 9 的新特性之一。�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/12/25/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%E4%BD%93%E9%AA%8C%E7%89%88%E4%BA%8C%E7%BB%B4%E7%A0%81/">
-                        小程序生成体验版二维码
+                    <a href="/2021/06/08/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+                        微信小程序的生命周期
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        生成二维码
+                        小程序的生命周期
 
 
-正常情况下，如果后台生成的小程序码不设置参数，那么扫描后就会直接跳转到正式环境，无法进行测试；
+
+方法
+说明
 
 
-可参考文档中的参数 env_version，即要打开的小程序版本。其默认值为release正式版，如果想要跳转到体验版为 trial，...
+
+
+onLaunch()
+小程序初始化完成时触发，全局只触发一次
+
+
+onLaunch()
+小程序初始化完成时触发，全局只触发一次
+
+
+onHide()
+小程序从前台进入后台时触发
+
+
+
+12345678910...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Dec 25 2021 00:00:00 GMT+0800">2021-12-25</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 08 2021 00:00:00 GMT+0800">2021-06-08</span></span>
         
         
     </div>
 
-    <a href="/2021/12/25/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%E4%BD%93%E9%AA%8C%E7%89%88%E4%BA%8C%E7%BB%B4%E7%A0%81/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/06/08/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -464,62 +404,99 @@ Universal Link 是苹果在 WWDC 2015 上提出的 iOS 9 的新特性之一。�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/10/15/VUE%E4%B8%AD%E5%B0%86px%E8%BD%AC%E6%88%90rem%E5%8D%95%E4%BD%8D/">
-                        VUE中将px转成rem单位
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
-在开发移动端项目时，需要对不同尺寸的设备进行适配，页面中字体、按钮等元素的大小与屏幕大小（屏幕的宽度）有关，可以通过 rem 来进行适配。
-
-rem 适配
-
-rem 是 CSS3 新增的一个相对单位，相对的是 HTML 根元素上的 font-siz...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Oct 15 2021 00:00:00 GMT+0800">2021-10-15</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/10/15/VUE%E4%B8%AD%E5%B0%86px%E8%BD%AC%E6%88%90rem%E5%8D%95%E4%BD%8D/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/09/26/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%99%BB%E5%BD%95%E5%90%8E%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/">
-                        小程序登录后获取用户信息
+                    <a href="/2021/06/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/">
+                        微信小程序图片优化方案
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
                         
-小程序的登录方式，比较常见的有手机号授权登录和用户信息授权登录，通常会根据不同的业务需求选择不同的登录方式，但有时可能会需要在登录时既获取用户的手机号又获取用户的个人信息，那么该怎么做呢？
+我们做微信小程序时，在通过&lt;image&gt;标签显示网络图片时，如果网络状况较差，图片加载缓慢，在等待图片加载的过程中图片位置就会出现留白的情况，直到图片加载完成才会显示图片，十分影响用户体验。
 
-背景介绍
-由于“获取手机号”接口和“获取用户信息”接口都...
+通过以下几种方式可以解决这个问题：
+利用 ...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Sep 26 2021 00:00:00 GMT+0800">2021-09-26</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Jun 03 2021 00:00:00 GMT+0800">2021-06-03</span></span>
         
         
     </div>
 
-    <a href="/2021/09/26/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%99%BB%E5%BD%95%E5%90%8E%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2021/06/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/06/02/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%A4%84%E7%90%86/">
+                        小程序图片加载失败的处理
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        
+首先查看图片 url 是否存在，如果是不存在则显示默认图片如果图片 url 存在，但加载失败（如图片 404），则使用binderror，将错误的 url 替换为默认图片
+
+一、通常情况下
+12&lt;!-- wxml --&gt;&lt;imag...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jun 02 2021 00:00:00 GMT+0800">2021-06-02</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/06/02/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%A4%84%E7%90%86/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/06/01/OSS%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0/">
+                        阿里云OSS图片处理
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        OSS 图片处理参数 [1]
+1、图片缩放
+1.1、常用参数
+
+操作名称：resize
+指定宽高缩放
+
+m：指定缩放模式
+
+lfit（默认值）：等比缩放，缩放图限制为指定 w 与 h 的矩形内的最大图片，即缩放图的 w*h 不能大于指定的 w*h
+m...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 01 2021 00:00:00 GMT+0800">2021-06-01</span></span>
+        
+        
+    </div>
+
+    <a href="/2021/06/01/OSS%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -529,10 +506,14 @@ rem 是 CSS3 新增的一个相对单位，相对的是 HTML 根元素上的 fon
     <div class="home-paginator">
         <div class="paginator">
     
+        <a class="prev btn"
+           href="/"
+        >Prev</a>
+    
 
     
         <a class="next btn"
-           href="/page/2/"
+           href="/page/3/"
         >Next</a>
     
 </div>
